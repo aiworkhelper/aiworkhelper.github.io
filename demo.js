@@ -35,7 +35,9 @@
       subject: 'Задача с сайта',
       body: 'Здравствуйте! Хочу заказать:\n\n',
       empty: 'Нужна задача хотя бы из пары слов.',
-      hello: 'Приветствую! Я могу помочь с сайтом, ботом, 3D-моделью, таблицей или кодом.'
+      hello: 'Опишите задачу внизу, и я покажу, как она решается.',
+      stages: ['Задача', 'Разбор', 'Разработка', 'Проверка', 'Результат', 'Оплата'],
+      examples: ['Telegram-бот для записи в барбершоп', '3D-модель держателя для наушников', 'Таблица учёта заказов и расходов', 'Сайт для кофейни с меню и картой']
     },
     en: {
       me: 'You', bot: 'Maksim Helper · assistant',
@@ -53,7 +55,9 @@
       subject: 'Task from website',
       body: 'Hello! I would like to order:\n\n',
       empty: 'Please describe the task in at least a couple of words.',
-      hello: 'Hi! I can help with a website, a bot, a 3D model, a spreadsheet or code.'
+      hello: 'Describe a task below, and I will show how it gets solved.',
+      stages: ['Task', 'Analysis', 'Build', 'Testing', 'Result', 'Payment'],
+      examples: ['Telegram bot for barbershop bookings', '3D model of a headphone holder', 'Spreadsheet for orders and expenses', 'Website for a coffee shop with a menu and map']
     }
   }[lang];
 
@@ -149,7 +153,8 @@
   var input = form.querySelector('input');
   var runBtn = form.querySelector('button[type="submit"]');
   var chips = root.querySelectorAll('.demo-chips button');
-  var steps = root.querySelectorAll('.demo-steps li');
+  var segs = root.querySelectorAll('.demo-progress i');
+  var stage = root.querySelector('.demo-stage');
   var errorBox = root.querySelector('.demo-error');
 
   var busy = false, autoplayed = false, userTouched = false, token = 0;
@@ -167,10 +172,11 @@
     return T.from + r + ' ₽ / $' + Math.round(rub / RATE);
   }
   function setStep(i) {
-    for (var k = 0; k < steps.length; k++) {
-      steps[k].classList.toggle('done', k < i);
-      steps[k].classList.toggle('active', k === i);
+    for (var k = 0; k < segs.length; k++) {
+      segs[k].classList.toggle('done', k < i);
+      segs[k].classList.toggle('active', k === i);
     }
+    if (stage) stage.textContent = i < T.stages.length ? T.stages[i] + ' · ' + (i + 1) + '/' + T.stages.length : T.stages[T.stages.length - 1] + ' ✓';
   }
   function lock(on) {
     busy = on;
@@ -234,7 +240,7 @@
     var top = el('div', 'code-top'); top.appendChild(el('span', null, kind.file)); var st = el('span', null, T.build + '…'); top.appendChild(st);
     var pre = el('pre'); var codeText = el('span'); var caret = el('span', 'cursor');
     pre.appendChild(codeText); pre.appendChild(caret);
-    var bar = el('div', 'bar'); var fill = el('b'); bar.appendChild(fill);
+    var bar = el('div', 'code-progress'); var fill = el('b'); bar.appendChild(fill);
     c.appendChild(top); c.appendChild(pre); c.appendChild(bar);
     log.appendChild(c); scrollDown();
     var total = fillWords(kind.code.join('\n')).length, done = 0;
@@ -309,8 +315,15 @@
       scrollDown();
     }
     payBtn.addEventListener('click', finish);
-    // при автопоказе оплата «нажимается» сама, чтобы было видно весь путь
-    if (!userTouched) { await wait(1400); if (my === token && !userTouched) finish(); }
+    // при автопоказе оплата «нажимается» сама, а потом запускается следующий пример
+    if (!userTouched) {
+      await wait(1400);
+      if (my === token && !userTouched) {
+        await finish();
+        await wait(4500);
+        if (my === token && !userTouched) autoplay();
+      }
+    }
   }
 
   // ---------- Ввод ----------
@@ -333,11 +346,14 @@
   });
 
   // ---------- Автопоказ: когда демо появляется на экране, печатаем пример ----------
+  var exampleIndex = 0, visible = true;
   async function autoplay() {
-    if (autoplayed || userTouched || busy) return;
-    autoplayed = true;
-    var example = chips.length ? chips[0].textContent : '';
+    if (userTouched || busy) return;
+    // пока демо не видно на экране, ждём, чтобы не крутить анимацию впустую
+    while (!visible) { await wait(500); if (userTouched) return; }
+    var example = T.examples[exampleIndex++ % T.examples.length];
     input.value = '';
+    setStep(0);
     for (var i = 0; i < example.length; i++) {
       if (userTouched) return;
       input.value += example[i];
@@ -348,8 +364,9 @@
   }
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
-      if (entries[0].isIntersecting) { io.disconnect(); autoplay(); }
-    }, { threshold: 0.45 });
+      visible = entries[0].isIntersecting;
+      if (visible && !autoplayed) { autoplayed = true; setTimeout(autoplay, 900); }
+    }, { threshold: 0.4 });
     io.observe(root);
   }
 
