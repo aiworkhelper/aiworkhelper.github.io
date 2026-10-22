@@ -27,6 +27,40 @@
 .faq-a { padding: 0 20px 18px; color: var(--muted); }
 .faq-a p { margin: 0; }
 
+/* ---------- Видео-визитка: неброская ссылка + окно поверх страницы ---------- */
+.video-link {
+  margin-top: 14px; display: inline-flex; align-items: center; gap: 10px;
+  background: none; border: 0; padding: 4px 0; cursor: pointer;
+  font: 500 0.95rem var(--font-text); color: var(--muted);
+}
+.video-link:hover { color: var(--ink); }
+.video-link:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; border-radius: 6px; }
+.video-play {
+  width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid var(--line); flex: none; position: relative;
+}
+.video-play::after {
+  content: ''; position: absolute; left: 11px; top: 8.5px;
+  border-left: 10px solid var(--accent); border-top: 6.5px solid transparent; border-bottom: 6.5px solid transparent;
+}
+.video-sub { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); opacity: 0.8; }
+.video-dialog {
+  padding: 0; border: 0; background: transparent; overflow: visible;
+  max-width: min(92vw, 420px); width: 100%; margin: auto;
+}
+.video-dialog::backdrop { background: rgba(6, 9, 20, 0.78); backdrop-filter: blur(4px); }
+.video-dialog video {
+  display: block; width: 100%; height: auto; max-height: 86vh; aspect-ratio: 9 / 16; object-fit: contain;
+  border-radius: 18px; background: #0b0f1d; box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.7);
+}
+.video-close {
+  position: absolute; top: -14px; right: -14px; z-index: 2; width: 40px; height: 40px; border-radius: 50%;
+  border: 0; cursor: pointer; background: var(--surface); color: var(--ink); font-size: 1.5rem; line-height: 1;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+.video-close:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.video-note { margin: 10px 0 0; text-align: center; color: #c8cee6; font-size: 0.85rem; }
+@media (max-width: 600px) { .video-close { top: 8px; right: 8px; } }
+
 /* ---------- Полупрозрачный знак сайта в правом нижнем углу ---------- */
 .site-mark {
   position: fixed; right: 16px; bottom: 16px; z-index: 40;
@@ -111,6 +145,14 @@
   .faq summary:hover { color: var(--accent); }
   .faq details[open] .faq-a { animation: faq-open 0.35s ease; }
   @keyframes faq-open { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+
+  /* ---------- Видео-визитка: анимации ---------- */
+  .video-link, .video-play { transition: color 0.2s ease, border-color 0.2s ease, transform 0.25s ease; }
+  .video-link:hover .video-play { border-color: var(--accent); transform: scale(1.08); }
+  .video-dialog[open] { animation: video-in 0.3s ease; }
+  .video-dialog[open]::backdrop { animation: video-fade 0.3s ease; }
+  @keyframes video-in { from { opacity: 0; transform: translateY(16px) scale(0.97); } to { opacity: 1; transform: none; } }
+  @keyframes video-fade { from { opacity: 0; } to { opacity: 1; } }
 
   /* ---------- Появление блоков при прокрутке (класс ставит anim.js) ---------- */
   .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }

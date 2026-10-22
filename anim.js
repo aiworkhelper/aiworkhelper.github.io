@@ -1,4 +1,31 @@
 /*
+  Видео-визитка: открывается в окне поверх страницы и ставится на паузу при закрытии.
+*/
+(function () {
+  'use strict';
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+  function init() {
+  var dlg = document.getElementById('video-dialog');
+  var openBtn = document.querySelector('[data-video-open]');
+  if (!dlg || !openBtn || typeof dlg.showModal !== 'function') {
+    if (openBtn && dlg) {   // очень старый браузер: просто открываем файл
+      openBtn.addEventListener('click', function () { window.location.href = dlg.querySelector('source').src; });
+    }
+  } else {
+    var video = dlg.querySelector('video');
+    openBtn.addEventListener('click', function () {
+      dlg.showModal();
+      try { var pr = video.play(); if (pr && pr.catch) pr.catch(function () {}); } catch (e) {}
+      if (window.ym) { try { ym(113726093, 'reachGoal', 'video_open'); } catch (e) {} }
+    });
+    dlg.querySelector('[data-video-close]').addEventListener('click', function () { dlg.close(); });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });   // клик по фону
+    dlg.addEventListener('close', function () { video.pause(); });
+  }
+  }
+})();
+
+/*
   Плавное появление блоков при прокрутке.
   Прячутся только блоки ниже первого экрана, поэтому верх страницы виден сразу.
   Если браузер старый или включено «Уменьшить движение», ничего не происходит.

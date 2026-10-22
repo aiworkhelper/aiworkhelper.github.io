@@ -220,7 +220,7 @@
     ym(113726093, 'init', { ssr: true, webvisor: false, clickmap: true, accurateTrackBounce: true, trackLinks: true });
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/113726093" style="position:absolute; left:-9999px;" alt=""></div></noscript>
-  <link rel="stylesheet" href="../anim.css?v=20261022g">
+  <link rel="stylesheet" href="../anim.css?v=20261022h">
   <link rel="stylesheet" href="../demo.css?v=20261022d">
 </head>
 
@@ -257,6 +257,7 @@
             <a class="btn btn-ghost" href="#raboty">See my work</a>
           </div>
           <p class="note">My first projects come at a special price in exchange for a review.</p>
+          <button class="video-link" type="button" data-video-open><span class="video-play" aria-hidden="true"></span>Promo video<span class="video-sub">19 sec · in Russian</span></button>
         </div>
 
         <div class="demo" id="demo-app">
@@ -621,7 +622,14 @@
     });
   </script>
   <script src="../demo.js?v=20261022e"></script>
-  <script src="../anim.js?v=20261022g"></script>
+  <script src="../anim.js?v=20261022h"></script>
+  <dialog class="video-dialog" id="video-dialog" aria-label="Promo video">
+    <button class="video-close" type="button" data-video-close aria-label="Close">×</button>
+    <video controls playsinline preload="none" poster="../video/promo-cover.jpg" width="1080" height="1920">
+      <source src="../video/promo.mp4" type="video/mp4">
+    </video>
+    <p class="video-note">The video is in Russian.</p>
+  </dialog>
   <img class="site-mark" src="../favicon.svg?v=2" alt="" aria-hidden="true" width="44" height="44">
 </body>
 </html>
