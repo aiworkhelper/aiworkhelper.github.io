@@ -242,7 +242,7 @@
     ym(113726093, 'init', { ssr: true, webvisor: false, clickmap: true, accurateTrackBounce: true, trackLinks: true });
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/113726093" style="position:absolute; left:-9999px;" alt=""></div></noscript>
-  <link rel="stylesheet" href="anim.css?v=20261022h">
+  <link rel="stylesheet" href="anim.css?v=20261022j">
   <link rel="stylesheet" href="demo.css?v=20261022d">
 </head>
 
@@ -275,7 +275,7 @@
           <h1>Сайты, Telegram-боты и ИИ-автоматизация для малого бизнеса</h1>
           <p class="lead">Помогаю мастерам, студиям и небольшим компаниям принимать заявки и отвечать клиентам без ручной переписки. Использую нейросети там, где они экономят время, и проверяю результат сам.</p>
           <div class="actions">
-            <a class="btn" href="mailto:aiworkingmaksim@gmail.com?subject=Заявка%20с%20сайта">Написать на почту</a>
+            <a class="btn btn-ghost" href="mailto:aiworkingmaksim@gmail.com?subject=Заявка%20с%20сайта">Написать на почту</a>
             <a class="btn btn-ghost" href="#raboty">Смотреть работы</a>
           </div>
           <p class="note">Первые проекты беру по специальной цене в обмен на отзыв.</p>
@@ -440,6 +440,7 @@
             </label>
             <button class="btn" type="submit">Подготовить отзыв</button>
             <p class="form-error" id="r-error" role="alert" hidden></p>
+            <p class="form-ok" id="r-ok" role="status" hidden></p>
 
             <div class="form-result" id="r-result" role="status" hidden>
               <p><strong>Отзыв ещё не отправлен.</strong> Нажмите «Открыть письмо» и отправьте его из своей почты. Если письмо не открылось, скопируйте текст ниже и отправьте на aiworkingmaksim@gmail.com.</p>
@@ -500,16 +501,34 @@
 
     <section id="kontakty">
       <div class="wrap">
-        <div class="contact">
+        <div class="contact contact-grid">
+          <div>
           <h2>Расскажите о своей задаче</h2>
-          <p>Напишите на почту, что нужно сделать, и я отвечу с оценкой цены и срока.</p>
+          <p>Заполните форму или напишите на почту — отвечу в течение дня с оценкой цены и срока.</p>
           <p class="mail" id="email-text">aiworkingmaksim@gmail.com</p>
           <div class="actions">
-            <a class="btn" href="mailto:aiworkingmaksim@gmail.com?subject=Заявка%20с%20сайта">Написать на почту</a>
+            <a class="btn btn-ghost" href="mailto:aiworkingmaksim@gmail.com?subject=Заявка%20с%20сайта">Написать на почту</a>
             <button class="btn btn-ghost" id="copy-email" type="button">Скопировать адрес</button>
             <!-- ЗАМЕНИТЕ ссылку на GitHub, если у вас другой аккаунт -->
             <a class="btn btn-ghost" href="https://github.com/aiworkhelper" target="_blank" rel="noopener">Мой GitHub</a>
           </div>
+          </div>
+          <form class="lead-form" id="lead-form" novalidate>
+            <label>Имя
+              <input type="text" name="name" maxlength="60" autocomplete="name" required>
+            </label>
+            <label>Как с вами связаться
+              <input type="text" name="contact" maxlength="120" placeholder="Telegram, телефон или почта" required>
+            </label>
+            <label>Задача
+              <textarea name="task" maxlength="1500" placeholder="Например: бот для записи клиентов в барбершоп" required></textarea>
+            </label>
+            <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <button class="btn" type="submit">Отправить заявку</button>
+            <p class="form-note">Нажимая кнопку, вы соглашаетесь, что я свяжусь с вами по указанному контакту.</p>
+            <p class="form-error" role="alert" hidden></p>
+            <p class="form-ok" role="status" hidden></p>
+          </form>
         </div>
       </div>
     </section>
@@ -622,8 +641,17 @@
       rBody.value = body;
       rMail.href = 'mailto:' + REVIEW_EMAIL + '?subject=' + encodeURIComponent('Отзыв с сайта') +
                    '&body=' + encodeURIComponent(body);
-      rResult.hidden = false;
-      rMail.focus();
+      var rBtn = rForm.querySelector('button[type="submit"]'), rBtnText = rBtn.textContent;
+      var rOk = document.getElementById('r-ok');
+      rOk.hidden = true;
+      function showMailFallback() { rResult.hidden = false; rMail.focus(); }
+      if (!window.sendLead) { showMailFallback(); return; }
+      rBtn.disabled = true; rBtn.textContent = 'Отправляю…';
+      var fields = { _subject: 'Отзыв с сайта: ' + name };
+      fields['Имя'] = name; fields['Оценка'] = rating + ' из 5'; fields['Отзыв'] = text; fields['Согласие на публикацию'] = 'да';
+      window.sendLead(fields).then(function () {
+        rOk.textContent = 'Спасибо! Отзыв отправлен и появится на сайте после проверки.'; rOk.hidden = false; rForm.reset();
+      }).catch(showMailFallback).then(function () { rBtn.disabled = false; rBtn.textContent = rBtnText; });
     });
 
     rCopy.addEventListener('click', function () {
@@ -643,7 +671,8 @@
       }
     });
   </script>
-  <script src="demo.js?v=20261022e"></script>
+  <script src="leads.js?v=20261022j"></script>
+  <script src="demo.js?v=20261022i"></script>
   <script src="anim.js?v=20261022h"></script>
   <dialog class="video-dialog" id="video-dialog" aria-label="Видео-визитка">
     <button class="video-close" type="button" data-video-close aria-label="Закрыть">×</button>

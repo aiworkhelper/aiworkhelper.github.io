@@ -61,6 +61,27 @@
 .video-note { margin: 10px 0 0; text-align: center; color: #c8cee6; font-size: 0.85rem; }
 @media (max-width: 600px) { .video-close { top: 8px; right: 8px; } }
 
+/* ---------- Форма заявки в контактах ---------- */
+.contact-grid { display: grid; gap: 32px; grid-template-columns: 1fr; align-items: start; }
+@media (min-width: 860px) { .contact-grid { grid-template-columns: 1fr 1.05fr; } }
+.lead-form { display: grid; gap: 14px; min-width: 0; }
+.lead-form label { display: grid; gap: 6px; font-weight: 600; font-size: 0.95rem; }
+.lead-form input, .lead-form textarea {
+  font: inherit; font-weight: 400; color: var(--ink); background: var(--bg);
+  border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; width: 100%;
+}
+.lead-form textarea { min-height: 120px; resize: vertical; }
+.lead-form input:focus-visible, .lead-form textarea:focus-visible, .lead-form button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.lead-form .btn { font: inherit; font-weight: 600; cursor: pointer; justify-self: start; }
+.lead-form .btn[disabled] { opacity: 0.6; cursor: default; transform: none; }
+.lead-form .form-note { margin: 0; font-size: 0.82rem; color: var(--muted); }
+.lead-form .form-error a { color: inherit; font-weight: 600; }
+.form-ok { margin: 0; color: var(--accent); font-weight: 600; }
+.contact .lead-form p { margin: 0; max-width: none; }
+.contact .lead-form .form-ok { color: var(--accent); }
+.contact .lead-form .form-error { color: var(--danger); }
+.hp { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; opacity: 0; }
+
 /* ---------- Полупрозрачный знак сайта в правом нижнем углу ---------- */
 .site-mark {
   position: fixed; right: 16px; bottom: 16px; z-index: 40;
@@ -145,6 +166,10 @@
   .faq summary:hover { color: var(--accent); }
   .faq details[open] .faq-a { animation: faq-open 0.35s ease; }
   @keyframes faq-open { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+
+  .lead-form input, .lead-form textarea { transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+  .lead-form input:focus, .lead-form textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent); }
+  .form-ok:not([hidden]) { animation: pop-in 0.3s ease; }
 
   /* ---------- Видео-визитка: анимации ---------- */
   .video-link, .video-play { transition: color 0.2s ease, border-color 0.2s ease, transform 0.25s ease; }

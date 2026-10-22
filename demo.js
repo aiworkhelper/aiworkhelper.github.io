@@ -308,6 +308,10 @@
       var next = el('div', 'pay-actions'); next.style.marginTop = '12px';
       var send = el('a', 'btn', T.send);
       send.href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(T.subject) + '&body=' + encodeURIComponent(T.body + task);
+      // если на странице есть форма заявки — переносим задачу туда, письмо остаётся запасным вариантом
+      send.addEventListener('click', function (e) {
+        if (window.prefillLead) { e.preventDefault(); window.prefillLead(task); }
+      });
       var again = el('button', 'btn btn-ghost', T.again); again.type = 'button';
       again.addEventListener('click', function () { input.focus(); input.select(); });
       next.appendChild(send); next.appendChild(again);

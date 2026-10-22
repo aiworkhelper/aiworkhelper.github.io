@@ -233,7 +233,7 @@
     ym(113726093, 'init', { ssr: true, webvisor: false, clickmap: true, accurateTrackBounce: true, trackLinks: true });
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/113726093" style="position:absolute; left:-9999px;" alt=""></div></noscript>
-  <link rel="stylesheet" href="../anim.css?v=20261022h">
+  <link rel="stylesheet" href="../anim.css?v=20261022j">
   <link rel="stylesheet" href="../demo.css?v=20261022d">
 </head>
 
@@ -266,7 +266,7 @@
           <h1>Websites, Telegram bots and AI automation for small business</h1>
           <p class="lead">I help freelancers, studios and small companies take bookings and answer clients without endless manual messaging. I use AI where it saves time, and I check the result myself.</p>
           <div class="actions">
-            <a class="btn" href="mailto:aiworkingmaksim@gmail.com?subject=Request%20from%20website">Email me</a>
+            <a class="btn btn-ghost" href="mailto:aiworkingmaksim@gmail.com?subject=Request%20from%20website">Email me</a>
             <a class="btn btn-ghost" href="#raboty">See my work</a>
           </div>
           <p class="note">My first projects come at a special price in exchange for a review.</p>
@@ -431,6 +431,7 @@
             </label>
             <button class="btn" type="submit">Prepare review</button>
             <p class="form-error" id="r-error" role="alert" hidden></p>
+            <p class="form-ok" id="r-ok" role="status" hidden></p>
 
             <div class="form-result" id="r-result" role="status" hidden>
               <p><strong>The review has not been sent yet.</strong> Click “Open email” and send it from your mail app. If the email does not open, copy the text below and send it to aiworkingmaksim@gmail.com.</p>
@@ -491,16 +492,34 @@
 
     <section id="kontakty">
       <div class="wrap">
-        <div class="contact">
+        <div class="contact contact-grid">
+          <div>
           <h2>Tell me about your task</h2>
-          <p>Email me what needs to be done, and I will reply with a price and timeline estimate.</p>
+          <p>Fill in the form or email me — I will reply within a day with a price and timeline estimate.</p>
           <p class="mail" id="email-text">aiworkingmaksim@gmail.com</p>
           <div class="actions">
-            <a class="btn" href="mailto:aiworkingmaksim@gmail.com?subject=Request%20from%20website">Email me</a>
+            <a class="btn btn-ghost" href="mailto:aiworkingmaksim@gmail.com?subject=Request%20from%20website">Email me</a>
             <button class="btn btn-ghost" id="copy-email" type="button">Copy address</button>
             <!-- ЗАМЕНИТЕ ссылку на GitHub, если у вас другой аккаунт -->
             <a class="btn btn-ghost" href="https://github.com/aiworkhelper" target="_blank" rel="noopener">My GitHub</a>
           </div>
+          </div>
+          <form class="lead-form" id="lead-form" novalidate>
+            <label>Name
+              <input type="text" name="name" maxlength="60" autocomplete="name" required>
+            </label>
+            <label>How to reach you
+              <input type="text" name="contact" maxlength="120" placeholder="Telegram, phone or email" required>
+            </label>
+            <label>Task
+              <textarea name="task" maxlength="1500" placeholder="For example: a booking bot for a barbershop" required></textarea>
+            </label>
+            <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <button class="btn" type="submit">Send request</button>
+            <p class="form-note">By clicking the button, you agree that I will contact you using the details above.</p>
+            <p class="form-error" role="alert" hidden></p>
+            <p class="form-ok" role="status" hidden></p>
+          </form>
         </div>
       </div>
     </section>
@@ -613,8 +632,17 @@
       rBody.value = body;
       rMail.href = 'mailto:' + REVIEW_EMAIL + '?subject=' + encodeURIComponent('Review from website') +
                    '&body=' + encodeURIComponent(body);
-      rResult.hidden = false;
-      rMail.focus();
+      var rBtn = rForm.querySelector('button[type="submit"]'), rBtnText = rBtn.textContent;
+      var rOk = document.getElementById('r-ok');
+      rOk.hidden = true;
+      function showMailFallback() { rResult.hidden = false; rMail.focus(); }
+      if (!window.sendLead) { showMailFallback(); return; }
+      rBtn.disabled = true; rBtn.textContent = 'Sending…';
+      var fields = { _subject: 'Отзыв с сайта (EN): ' + name };
+      fields['Name'] = name; fields['Rating'] = rating + ' out of 5'; fields['Review'] = text; fields['Consent to publish'] = 'yes';
+      window.sendLead(fields).then(function () {
+        rOk.textContent = 'Thank you! Your review has been sent and will appear on the site after I check it.'; rOk.hidden = false; rForm.reset();
+      }).catch(showMailFallback).then(function () { rBtn.disabled = false; rBtn.textContent = rBtnText; });
     });
 
     rCopy.addEventListener('click', function () {
@@ -634,7 +662,8 @@
       }
     });
   </script>
-  <script src="../demo.js?v=20261022e"></script>
+  <script src="../leads.js?v=20261022j"></script>
+  <script src="../demo.js?v=20261022i"></script>
   <script src="../anim.js?v=20261022h"></script>
   <dialog class="video-dialog" id="video-dialog" aria-label="Promo video">
     <button class="video-close" type="button" data-video-close aria-label="Close">×</button>
