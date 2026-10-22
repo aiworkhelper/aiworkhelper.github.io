@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://aiworkhelper.github.io/sitemap.xml
+Sitemap: https://aiworkhelper.ru/sitemap.xml
