@@ -61,6 +61,22 @@
 .video-note { margin: 10px 0 0; text-align: center; color: #c8cee6; font-size: 0.85rem; }
 @media (max-width: 600px) { .video-close { top: 8px; right: 8px; } }
 
+/* ---------- Из чего складывается стоимость ---------- */
+.price-cards { display: grid; gap: 16px; grid-template-columns: 1fr; }
+@media (min-width: 860px) { .price-cards { grid-template-columns: repeat(3, 1fr); } }
+.pc { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 24px; display: flex; flex-direction: column; min-width: 0; }
+.pc-tag { margin: 0 0 8px; font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+.pc h3 { font-size: 1.2rem; margin: 0 0 10px; }
+.pc-price { margin: 0 0 16px; font-family: var(--font-mono); font-size: 1.15rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+.pc-price span { font-family: var(--font-text); font-size: 0.85rem; font-weight: 400; color: var(--muted); }
+.pc ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.pc li { position: relative; padding-left: 24px; color: var(--muted); font-size: 0.95rem; }
+.pc li::before { content: '✓'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+.pc-note { margin: 16px 0 0; padding-top: 12px; border-top: 1px dashed var(--line); font-size: 0.88rem; color: var(--ink); }
+.price-foot { margin-top: 18px; display: grid; gap: 8px; max-width: 48rem; }
+.price-foot p { margin: 0; color: var(--muted); }
+.price-foot b { color: var(--ink); }
+
 /* ---------- Форма заявки в контактах ---------- */
 .contact-grid { display: grid; gap: 32px; grid-template-columns: 1fr; align-items: start; }
 @media (min-width: 860px) { .contact-grid { grid-template-columns: 1fr 1.05fr; } }
@@ -157,6 +173,10 @@
   /* ---------- Карточки на странице 3D-модели ---------- */
   .card { transition: border-color 0.25s ease, transform 0.25s ease; }
   .card:hover { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); }
+
+  .pc { transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease; }
+  .pc:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); box-shadow: 0 16px 34px -22px color-mix(in srgb, var(--accent) 60%, transparent); }
+  .pc.reveal.in:hover { transform: translateY(-3px); }
 
   /* ---------- Частые вопросы: плавное раскрытие ---------- */
   .faq details { transition: border-color 0.25s ease; }

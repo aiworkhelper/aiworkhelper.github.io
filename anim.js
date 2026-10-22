@@ -37,7 +37,7 @@
 
   var groups = [
     '.section-head', '.service', '.work', '.steps li',
-    '.reviews-grid > *', '.faq details', '.contact', '.details .card'
+    '.pc', '.price-foot', '.reviews-grid > *', '.faq details', '.contact', '.details .card'
   ];
   var fold = window.innerHeight;
   var items = [];
