@@ -221,6 +221,7 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/113726093" style="position:absolute; left:-9999px;" alt=""></div></noscript>
   <link rel="stylesheet" href="../anim.css">
+  <link rel="stylesheet" href="../demo.css">
 </head>
 
 <body>
@@ -267,6 +268,44 @@
 <span class="d"># pick a service, date and time,
 # name and phone, request to the owner</span></pre>
         </div>
+      </div>
+    </section>
+
+    <section id="demo">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="label">Demo</p>
+          <h2>Describe a task and watch how it gets solved</h2>
+          <p>Type what you need or pick an example. The assistant walks through the whole path: from analyzing the task to the finished result and the invoice.</p>
+        </div>
+        <div class="demo" id="demo-app">
+          <ol class="demo-steps" aria-label="Work stages">
+            <li><span class="dot">1</span><span>Task<span class="hint-text">you describe what you need</span></span></li>
+            <li><span class="dot">2</span><span>Analysis<span class="hint-text">plan and details</span></span></li>
+            <li><span class="dot">3</span><span>Build<span class="hint-text">I write the solution</span></span></li>
+            <li><span class="dot">4</span><span>Testing<span class="hint-text">I check the result</span></span></li>
+            <li><span class="dot">5</span><span>Result<span class="hint-text">delivery</span></span></li>
+            <li><span class="dot">6</span><span>Payment<span class="hint-text">with an official receipt</span></span></li>
+          </ol>
+          <div class="demo-window">
+            <div class="demo-bar"><i></i><i></i><i></i><span>new order</span><span class="demo-badge">demo</span></div>
+            <div class="demo-log" aria-live="polite"></div>
+            <form class="demo-form" novalidate>
+              <div class="demo-input-row">
+                <input type="text" maxlength="200" aria-label="Your task" placeholder="For example: a website for a coffee shop with a menu and map">
+                <button class="btn" type="submit">Run</button>
+              </div>
+              <div class="demo-chips" aria-label="Example tasks">
+                <button type="button">Telegram bot for barbershop bookings</button>
+                <button type="button">3D model of a headphone holder</button>
+                <button type="button">Spreadsheet for orders and expenses</button>
+                <button type="button">Move my bot to a server</button>
+              </div>
+              <p class="form-error demo-error" role="alert" hidden></p>
+            </form>
+          </div>
+        </div>
+        <p class="demo-foot">The animation shows the stages of work, not real time: actual timelines are in the services table. Payment in the demo is not real, and no money is charged.</p>
       </div>
     </section>
 
@@ -569,6 +608,7 @@
       }
     });
   </script>
+  <script src="../demo.js"></script>
   <script src="../anim.js"></script>
 </body>
 </html>

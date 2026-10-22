@@ -228,6 +228,7 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/113726093" style="position:absolute; left:-9999px;" alt=""></div></noscript>
   <link rel="stylesheet" href="anim.css">
+  <link rel="stylesheet" href="demo.css">
 </head>
 
 <body>
@@ -274,6 +275,44 @@
 <span class="d"># выбор услуги, даты и времени,
 # имя и телефон, заявка владельцу</span></pre>
         </div>
+      </div>
+    </section>
+
+    <section id="demo">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="label">Демо</p>
+          <h2>Опишите задачу и посмотрите, как она решается</h2>
+          <p>Напишите, что нужно сделать, или выберите пример. Ассистент покажет весь путь: от разбора задачи до готового результата и счёта.</p>
+        </div>
+        <div class="demo" id="demo-app">
+          <ol class="demo-steps" aria-label="Этапы работы">
+            <li><span class="dot">1</span><span>Задача<span class="hint-text">вы описываете, что нужно</span></span></li>
+            <li><span class="dot">2</span><span>Разбор<span class="hint-text">план и детали</span></span></li>
+            <li><span class="dot">3</span><span>Разработка<span class="hint-text">пишу решение</span></span></li>
+            <li><span class="dot">4</span><span>Проверка<span class="hint-text">тестирую результат</span></span></li>
+            <li><span class="dot">5</span><span>Результат<span class="hint-text">сдаю готовое</span></span></li>
+            <li><span class="dot">6</span><span>Оплата<span class="hint-text">по чеку самозанятого</span></span></li>
+          </ol>
+          <div class="demo-window">
+            <div class="demo-bar"><i></i><i></i><i></i><span>новый заказ</span><span class="demo-badge">демо</span></div>
+            <div class="demo-log" aria-live="polite"></div>
+            <form class="demo-form" novalidate>
+              <div class="demo-input-row">
+                <input type="text" maxlength="200" aria-label="Ваша задача" placeholder="Например: сайт для кофейни с меню и картой">
+                <button class="btn" type="submit">Запустить</button>
+              </div>
+              <div class="demo-chips" aria-label="Примеры задач">
+                <button type="button">Telegram-бот для записи в барбершоп</button>
+                <button type="button">3D-модель держателя для наушников</button>
+                <button type="button">Таблица учёта заказов и расходов</button>
+                <button type="button">Перенести бота на сервер</button>
+              </div>
+              <p class="form-error demo-error" role="alert" hidden></p>
+            </form>
+          </div>
+        </div>
+        <p class="demo-foot">Анимация показывает этапы работы, а не реальное время: настоящие сроки указаны в таблице услуг. Оплата в демо ненастоящая, деньги не списываются.</p>
       </div>
     </section>
 
@@ -576,6 +615,7 @@
       }
     });
   </script>
+  <script src="demo.js"></script>
   <script src="anim.js"></script>
 </body>
 </html>
