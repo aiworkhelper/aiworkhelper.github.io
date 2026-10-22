@@ -96,3 +96,28 @@
   .paid circle, .paid path { animation: none; stroke-dashoffset: 0; }
   .demo-log { scroll-behavior: auto; }
 }
+
+/* ---------- Крыло валькирии на фоне первого экрана ---------- */
+.hero { position: relative; overflow: hidden; isolation: isolate; }
+.hero-wing {
+  position: absolute; z-index: -1; pointer-events: none;
+  width: 720px; height: auto; left: calc(50% + 200px); top: -20px;
+  color: var(--accent);
+  transform-origin: 6% 96%;
+  opacity: 0;
+  animation: wing-in 1.6s ease 0.2s forwards, wing-breathe 9s ease-in-out 1.8s infinite alternate;
+}
+.hero-wing path { stroke: currentColor; stroke-width: 1.2; stroke-linejoin: round; }
+.hero-wing .wf1 { fill: currentColor; fill-opacity: 0.045; stroke-opacity: 0.2; }
+.hero-wing .wf2 { fill: currentColor; fill-opacity: 0.06; stroke-opacity: 0.2; }
+.hero-wing .wf3 { fill: currentColor; fill-opacity: 0.08; stroke-opacity: 0.22; }
+.hero-wing .wf4 { fill: currentColor; fill-opacity: 0.11; stroke-opacity: 0.25; }
+.hero-wing .wsh { fill: none; stroke-opacity: 0.12; stroke-width: 1; }
+@media (max-width: 759px) {
+  .hero-wing { width: 520px; left: auto; right: -190px; top: auto; bottom: 150px; }
+}
+@keyframes wing-in { from { opacity: 0; transform: rotate(-7deg) scale(0.97); } to { opacity: 1; transform: none; } }
+@keyframes wing-breathe { from { transform: rotate(0deg); } to { transform: rotate(-2.5deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .hero-wing { animation: none; opacity: 1; }
+}
