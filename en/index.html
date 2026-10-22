@@ -129,8 +129,8 @@
     .service { display: grid; gap: 6px 24px; grid-template-columns: 1fr; padding: 22px 0; border-bottom: 1px solid var(--line); }
     .service h3 { font-size: 1.15rem; }
     .service p { margin: 0; color: var(--muted); }
-    .service .meta { font-family: var(--font-mono); font-size: 0.88rem; color: var(--ink); }
-    .service .meta span { color: var(--muted); }
+    .service .meta { font-family: var(--font-mono); font-size: 0.88rem; color: var(--ink); white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .service .meta span { display: block; color: var(--muted); white-space: normal; margin-top: 2px; }
 
     /* ---------- 7. РАБОТЫ ---------- */
     .works { display: grid; gap: 18px; grid-template-columns: 1fr; }
@@ -192,13 +192,14 @@
 
     @media (min-width: 760px) {
       .hero-grid { grid-template-columns: 1.05fr 0.95fr; }
-      .service { grid-template-columns: 1.2fr 1.6fr 0.8fr; align-items: baseline; }
       .works { grid-template-columns: 1fr 1fr; }
-      .steps { grid-template-columns: repeat(4, 1fr); }
+      .steps { grid-template-columns: 1fr 1fr; }
       .reviews-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (min-width: 960px) {
       .works { grid-template-columns: repeat(3, 1fr); }
+      .steps { grid-template-columns: repeat(4, 1fr); }
+      .service { grid-template-columns: 1.1fr 1.7fr minmax(11.5rem, 0.8fr); align-items: baseline; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -279,52 +280,52 @@
           <div class="service">
             <h3>One-page website</h3>
             <p>Prices, key benefits, contacts and a booking button. Works well on phones, hosted for free.</p>
-            <div class="meta">from 3,000 ₽ / $37 <span>· 2–5 days</span></div>
+            <div class="meta">from 3,000 ₽ / $37<span>2–5 days</span></div>
           </div>
           <div class="service">
             <h3>Telegram bot for bookings and requests</h3>
             <p>The client picks a service and a time, and you get a ready request. AI can be added to answer questions.</p>
-            <div class="meta">from 3,000 ₽ / $37 <span>· 3–7 days</span></div>
+            <div class="meta">from 3,000 ₽ / $37<span>3–7 days</span></div>
           </div>
           <div class="service">
             <h3>Routine automation</h3>
             <p>Form requests land in a spreadsheet and in Telegram, and client reminders go out on their own.</p>
-            <div class="meta">from 2,000 ₽ / $24 <span>· 1–3 days</span></div>
+            <div class="meta">from 2,000 ₽ / $24<span>1–3 days</span></div>
           </div>
           <div class="service">
             <h3>Server setup and launch</h3>
             <p>I rent and configure a VPS, move your bot or site there and set up autostart, so everything runs 24/7 without your computer. Server rent is paid separately.</p>
-            <div class="meta">from 1,500 ₽ / $18 <span>· 1 day</span></div>
+            <div class="meta">from 1,500 ₽ / $18<span>1 day</span></div>
           </div>
           <div class="service">
             <h3>Writing and fixing code</h3>
             <p>Python and JavaScript scripts, bug fixes, improving existing code. I explain what was wrong and what changed.</p>
-            <div class="meta">from 500 ₽ / $6 <span>· per task, from 1 day</span></div>
+            <div class="meta">from 500 ₽ / $6<span>per task, from 1 day</span></div>
           </div>
           <div class="service">
             <h3>Improving an existing website</h3>
             <p>Text and design edits, new sections, a review form, analytics, a site icon and your own domain.</p>
-            <div class="meta">from 1,000 ₽ / $12 <span>· 1–2 days</span></div>
+            <div class="meta">from 1,000 ₽ / $12<span>1–2 days</span></div>
           </div>
           <div class="service">
             <h3>3D modeling</h3>
             <p>Parts for 3D printing (STL) from your dimensions or sketch, interactive 3D scenes and previews for websites.</p>
-            <div class="meta">from 1,500 ₽ / $18 <span>· 1–3 days</span></div>
+            <div class="meta">from 1,500 ₽ / $18<span>1–3 days</span></div>
           </div>
           <div class="service">
             <h3>Spreadsheets and reports</h3>
             <p>Excel and Google Sheets with formulas: tracking requests, clients and expenses, with charts and summaries that update themselves.</p>
-            <div class="meta">from 1,000 ₽ / $12 <span>· 1–2 days</span></div>
+            <div class="meta">from 1,000 ₽ / $12<span>1–2 days</span></div>
           </div>
           <div class="service">
             <h3>Data collection and processing</h3>
             <p>Collecting data from public sources, cleaning and merging lists, moving data between spreadsheets and services.</p>
-            <div class="meta">from 1,500 ₽ / $18 <span>· 1–3 days</span></div>
+            <div class="meta">from 1,500 ₽ / $18<span>1–3 days</span></div>
           </div>
           <div class="service">
             <h3>Presentations and documents</h3>
             <p>Proposals, price lists, presentations and manuals: clean layout, files ready to print or send.</p>
-            <div class="meta">from 1,000 ₽ / $12 <span>· 1–2 days</span></div>
+            <div class="meta">from 1,000 ₽ / $12<span>1–2 days</span></div>
           </div>
         </div>
       </div>
