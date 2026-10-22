@@ -10,7 +10,7 @@
 
   var groups = [
     '.section-head', '.service', '.work', '.steps li',
-    '.reviews-grid > *', '.contact', '.details .card'
+    '.reviews-grid > *', '.faq details', '.contact', '.details .card'
   ];
   var fold = window.innerHeight;
   var items = [];

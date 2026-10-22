@@ -10,6 +10,23 @@
 .logo-name { font-family: var(--font-title); font-weight: 700; font-size: 1.05rem; letter-spacing: -0.01em; color: var(--ink); }
 .logo-role { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-top: 3px; }
 
+/* ---------- Частые вопросы (раскрывающийся список) ---------- */
+.faq { display: grid; gap: 10px; max-width: 48rem; }
+.faq details { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
+.faq summary {
+  list-style: none; cursor: pointer; padding: 16px 52px 16px 20px; position: relative;
+  font-family: var(--font-title); font-weight: 600; font-size: 1.02rem; line-height: 1.35;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: ''; position: absolute; right: 20px; top: 50%; width: 12px; height: 12px; margin-top: -8px;
+  border-right: 2px solid var(--accent); border-bottom: 2px solid var(--accent); transform: rotate(45deg);
+}
+.faq details[open] summary::after { transform: rotate(-135deg); margin-top: -2px; }
+.faq summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 14px; }
+.faq-a { padding: 0 20px 18px; color: var(--muted); }
+.faq-a p { margin: 0; }
+
 /* ---------- Полупрозрачный знак сайта в правом нижнем углу ---------- */
 .site-mark {
   position: fixed; right: 16px; bottom: 16px; z-index: 40;
@@ -85,6 +102,15 @@
   /* ---------- Карточки на странице 3D-модели ---------- */
   .card { transition: border-color 0.25s ease, transform 0.25s ease; }
   .card:hover { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); }
+
+  /* ---------- Частые вопросы: плавное раскрытие ---------- */
+  .faq details { transition: border-color 0.25s ease; }
+  .faq details:hover, .faq details[open] { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
+  .faq summary::after { transition: transform 0.3s ease, margin-top 0.3s ease; }
+  .faq summary { transition: color 0.2s ease; }
+  .faq summary:hover { color: var(--accent); }
+  .faq details[open] .faq-a { animation: faq-open 0.35s ease; }
+  @keyframes faq-open { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
 
   /* ---------- Появление блоков при прокрутке (класс ставит anim.js) ---------- */
   .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
