@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<!--
+  ЛИЧНЫЙ САЙТ-ВИЗИТКА: программирование и ИИ.
+  Что нужно заменить перед публикацией (ищите слово ЗАМЕНИТЕ в комментариях):
+    1) Имя («Максим Helper») стоит в шапке и в подвале, при необходимости поменяйте.
+    2) Почта для связи уже указана (aiworkingmaksim@gmail.com), она встречается в двух кнопках и один раз текстом.
+       Если смените адрес, замените его во всех трёх местах.
+    3) Ссылку на ваш GitHub в блоке контактов.
+  Цены и сроки подправьте под себя в блоке «Услуги».
+-->
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Разработчик ботов и ИИ-автоматизации</title>
+  <meta name="description" content="Делаю сайты, Telegram-ботов и ИИ-автоматизацию, настраиваю серверы, пишу и исправляю код, делаю 3D-модели, таблицы и документы. Примеры работ, цены и контакты.">
+
+  <!-- Значок сайта «Ai»: SVG для современных браузеров, ICO как запасной вариант, PNG для экрана «домой» на телефоне -->
+  <link rel="alternate" hreflang="ru" href="https://aiworkhelper.github.io/">
+  <link rel="alternate" hreflang="en" href="https://aiworkhelper.github.io/en/">
+  <link rel="alternate" hreflang="x-default" href="https://aiworkhelper.github.io/">
+
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@500;600;700&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+
+  <style>
+    /* ---------- 1. ЦВЕТА И ШРИФТЫ ----------
+       Светлая тема по умолчанию, тёмная включается сама, если так настроен телефон или компьютер. */
+    :root {
+      --bg: #f0f2f8;
+      --surface: #ffffff;
+      --ink: #12172b;
+      --muted: #565d78;
+      --accent: #2f4bff;
+      --accent-ink: #ffffff;       /* цвет текста на кнопке */
+      --line: #d9deec;
+      --danger: #b3261e;           /* цвет сообщений об ошибке в форме */
+      --code-bg: #0f1530;         /* карточка с кодом всегда тёмная */
+      --code-ink: #dfe5ff;
+      --code-dim: #7d89b8;
+      --code-key: #9db0ff;
+      --code-str: #ffc477;
+      --font-title: 'Geologica', 'Trebuchet MS', system-ui, sans-serif;
+      --font-text: 'Golos Text', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', Consolas, monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0d1120;
+        --surface: #151b30;
+        --ink: #edf0fb;
+        --muted: #9aa3c0;
+        --accent: #8196ff;
+        --accent-ink: #0d1120;
+        --line: #273050;
+        --danger: #ff8a80;
+        color-scheme: dark;
+      }
+    }
+
+    /* ---------- 2. БАЗА ---------- */
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-text);
+      font-size: 17px;
+      line-height: 1.6;
+    }
+    a { color: inherit; }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+    h1, h2, h3 { font-family: var(--font-title); line-height: 1.12; margin: 0; font-weight: 600; letter-spacing: -0.01em; text-wrap: balance; }
+    h2 { font-size: clamp(1.5rem, 4vw, 2rem); }
+    section { padding: 56px 0; }
+    .label { font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; }
+    a:focus-visible, .btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+    /* ---------- 3. ШАПКА ---------- */
+    header { border-bottom: 1px solid var(--line); }
+    .bar { display: flex; align-items: center; justify-content: space-between; gap: 10px 16px; padding-block: 16px; flex-wrap: wrap; }
+    .logo { font-family: var(--font-mono); font-weight: 500; text-decoration: none; }  /* ЗАМЕНИТЕ имя в HTML ниже */
+    nav { display: flex; gap: 4px 20px; flex-wrap: wrap; }
+    nav a { text-decoration: none; color: var(--muted); font-weight: 500; }
+    nav a:hover { color: var(--ink); }
+
+    /* Переключатель языка RU / EN в правом верхнем углу */
+    .lang { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 3px; flex: none; }
+    .lang a { font-family: var(--font-mono); font-size: 0.82rem; font-weight: 500; text-decoration: none; color: var(--muted); padding: 4px 11px; border-radius: 999px; line-height: 1.4; }
+    .lang a:hover { color: var(--ink); }
+    .lang a[aria-current="page"] { background: var(--accent); color: var(--accent-ink); }
+    .lang a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+    .bar .lang { order: 2; }
+    .bar nav { order: 3; width: 100%; }
+    @media (min-width: 900px) {
+      .bar nav { order: 1; width: auto; margin-left: auto; }
+      .bar .lang { margin-left: 8px; }
+    }
+
+    /* ---------- 4. КНОПКИ ---------- */
+    .btn {
+      display: inline-block; padding: 14px 26px; border-radius: 10px;
+      background: var(--accent); color: var(--accent-ink);
+      font-weight: 600; text-decoration: none; border: 2px solid var(--accent);
+      transition: transform 0.15s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    button.btn { font-family: inherit; font-size: inherit; line-height: inherit; cursor: pointer; }
+
+    /* ---------- 5. ГЛАВНЫЙ ЭКРАН ---------- */
+    .hero { padding: 56px 0 24px; }
+    .hero-grid { display: grid; gap: 40px; grid-template-columns: 1fr; align-items: center; }
+    .hero h1 { font-size: clamp(2rem, 6.4vw, 3.4rem); margin-bottom: 20px; }
+    .hero p.lead { font-size: 1.12rem; color: var(--muted); max-width: 33rem; margin: 0 0 28px; }
+    .hero .note { margin: 18px 0 0; font-size: 0.92rem; color: var(--muted); }
+
+    .code { background: var(--code-bg); color: var(--code-ink); border-radius: 14px; overflow: hidden; border: 1px solid #232c55; min-width: 0; }
+    .code-head { display: flex; justify-content: space-between; gap: 12px; padding: 10px 16px; border-bottom: 1px solid #232c55; font-family: var(--font-mono); font-size: 0.78rem; color: var(--code-dim); }
+    .code pre { margin: 0; padding: 18px 16px; overflow-x: auto; font-family: var(--font-mono); font-size: 0.86rem; line-height: 1.7; }
+    .k { color: var(--code-key); }
+    .s { color: var(--code-str); }
+    .d { color: var(--code-dim); }
+
+    /* ---------- 6. УСЛУГИ ---------- */
+    .section-head { margin-bottom: 28px; max-width: 36rem; }
+    .section-head p { color: var(--muted); margin: 10px 0 0; }
+    .services { border-top: 1px solid var(--line); }
+    .service { display: grid; gap: 6px 24px; grid-template-columns: 1fr; padding: 22px 0; border-bottom: 1px solid var(--line); }
+    .service h3 { font-size: 1.15rem; }
+    .service p { margin: 0; color: var(--muted); }
+    .service .meta { font-family: var(--font-mono); font-size: 0.88rem; color: var(--ink); white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .service .meta span { display: block; color: var(--muted); white-space: normal; margin-top: 2px; }
+
+    /* ---------- 7. РАБОТЫ ---------- */
+    .works { display: grid; gap: 18px; grid-template-columns: 1fr; }
+    .work { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 26px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+    .work h3 { font-size: 1.15rem; }
+    .work p { margin: 0; color: var(--muted); }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+    .tags li { font-family: var(--font-mono); font-size: 0.78rem; padding: 3px 10px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); }
+    .work a.go { margin-top: auto; font-weight: 600; text-decoration: none; color: var(--accent); }
+    .work a.go:hover { text-decoration: underline; }
+
+    /* ---------- 8. ЭТАПЫ ---------- */
+    .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; grid-template-columns: 1fr; counter-reset: step; }
+    .steps li { counter-increment: step; padding-left: 52px; position: relative; }
+    .steps li::before {
+      content: counter(step); position: absolute; left: 0; top: 0;
+      width: 36px; height: 36px; border-radius: 50%;
+      display: grid; place-items: center;
+      font-family: var(--font-mono); font-weight: 500; font-size: 0.9rem;
+      background: var(--accent); color: var(--accent-ink);
+    }
+    .steps h3 { font-size: 1.05rem; margin-bottom: 4px; }
+    .steps p { margin: 0; color: var(--muted); }
+
+    /* ---------- 8б. ОТЗЫВЫ ---------- */
+    [hidden] { display: none !important; }
+    .reviews-grid { display: grid; gap: 24px; grid-template-columns: 1fr; align-items: start; }
+    .reviews { display: grid; gap: 16px; min-width: 0; }
+    .review { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px; margin: 0; }
+    .review .stars { color: var(--accent); letter-spacing: 0.15em; font-size: 1.05rem; margin: 0 0 8px; }
+    .review blockquote { margin: 0 0 12px; overflow-wrap: anywhere; }
+    .review figcaption { color: var(--muted); font-size: 0.92rem; }
+    .reviews-empty { border: 2px dashed var(--line); border-radius: 16px; padding: 24px; color: var(--muted); }
+    .reviews-empty strong { display: block; margin-bottom: 6px; color: var(--ink); font-family: var(--font-title); font-weight: 600; }
+    .review-form { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 26px; display: grid; gap: 16px; min-width: 0; }
+    .review-form h3 { font-size: 1.15rem; }
+    .review-form label { display: grid; gap: 6px; font-weight: 600; font-size: 0.95rem; }
+    .review-form input[type="text"], .review-form select, .review-form textarea {
+      font: inherit; font-weight: 400; color: var(--ink); background: var(--bg);
+      border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; width: 100%;
+    }
+    .review-form textarea { min-height: 120px; resize: vertical; }
+    .review-form input:focus-visible, .review-form select:focus-visible,
+    .review-form textarea:focus-visible, .review-form button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+    .review-form label.check { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; color: var(--muted); }
+    .review-form label.check input { margin-top: 5px; flex: none; }
+    .review-form .btn { font: inherit; font-weight: 600; cursor: pointer; justify-self: start; }
+    .form-error { margin: 0; color: var(--danger); font-weight: 500; }
+    .form-result { border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: grid; gap: 12px; background: var(--bg); }
+    .form-result p { margin: 0; color: var(--muted); }
+    .form-result textarea { min-height: 150px; font-family: var(--font-mono); font-size: 0.85rem; }
+
+    /* ---------- 9. КОНТАКТЫ И ПОДВАЛ ---------- */
+    .contact { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 36px 28px; }
+    .contact h2 { margin-bottom: 12px; }
+    .contact p { color: var(--muted); max-width: 34rem; margin: 0 0 24px; }
+    .contact p.mail { font-family: var(--font-mono); font-size: 1.05rem; color: var(--ink); margin: 0 0 24px; overflow-wrap: anywhere; user-select: all; }
+    footer { padding: 28px 0 44px; color: var(--muted); font-size: 0.92rem; }
+
+    @media (min-width: 760px) {
+      .hero-grid { grid-template-columns: 1.05fr 0.95fr; }
+      .works { grid-template-columns: 1fr 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; }
+      .reviews-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (min-width: 960px) {
+      .works { grid-template-columns: repeat(3, 1fr); }
+      .steps { grid-template-columns: repeat(4, 1fr); }
+      .service { grid-template-columns: 1.1fr 1.7fr minmax(11.5rem, 0.8fr); align-items: baseline; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .btn { transition: none; }
+      .btn:hover { transform: none; }
+    }
+  </style>
+
+  <!-- Яндекс Метрика: счётчик посещений (номер 113726093). Вебвизор выключен. -->
+  <script>
+    (function (m, e, t, r, i, k, a) {
+      m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments); };
+      m[i].l = 1 * new Date();
+      for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+      k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a);
+    })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=113726093', 'ym');
+
+    ym(113726093, 'init', { ssr: true, webvisor: false, clickmap: true, accurateTrackBounce: true, trackLinks: true });
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/113726093" style="position:absolute; left:-9999px;" alt=""></div></noscript>
+  <link rel="stylesheet" href="../../anim.css?v=20261022b">
+  <link rel="stylesheet" href="../../demo.css?v=20261022d">
+
+  <style>
+    /* Вариант со шлемом: только для этой страницы предпросмотра */
+    .hero-helmet { width: clamp(240px, calc((100vw - 1040px) / 2 + 100px), 560px); left: calc(50% + 440px); top: 60px; transform-origin: 34% 70%;
+      animation: wing-in 1.6s ease 0.2s forwards, helmet-float 7s ease-in-out 1.8s infinite alternate; }
+    .hero-helmet .hm1 { fill: currentColor; fill-opacity: 0.09; stroke-opacity: 0.32; }
+    .hero-helmet .hm2 { fill: currentColor; fill-opacity: 0.14; stroke-opacity: 0.36; }
+    .hero-helmet .hm3 { fill: currentColor; fill-opacity: 0.22; stroke-opacity: 0.4; stroke: currentColor; stroke-width: 1.2; }
+    .hero-helmet .wf3 { fill-opacity: 0.08; }
+    @keyframes helmet-float { from { transform: translateY(0) rotate(0); } to { transform: translateY(-8px) rotate(-1.5deg); } }
+    @media (max-width: 1199px) and (min-width: 760px) { .hero-helmet { width: 300px; left: auto; right: -120px; top: 20px; } }
+    @media (max-width: 759px) { .hero-helmet { width: 380px; left: auto; right: -110px; top: auto; bottom: 150px; } }
+    .preview-note { position: fixed; left: 12px; bottom: 12px; z-index: 50; font: 500 0.8rem var(--font-mono); background: var(--accent); color: var(--accent-ink); padding: 6px 12px; border-radius: 999px; }
+  </style>
+</head>
+
+<body>
+  <div class="preview-note">Предпросмотр: вариант со шлемом</div>
+  <header>
+    <div class="wrap bar">
+      <a class="logo" href="#top">Максим Helper</a>
+      <nav aria-label="Основное меню">
+        <a href="#uslugi">Услуги</a>
+        <a href="#raboty">Работы</a>
+        <a href="#process">Как работаю</a>
+        <a href="#otzyvy">Отзывы</a>
+        <a href="#kontakty">Контакты</a>
+      </nav>
+      <div class="lang" role="group" aria-label="Язык сайта">
+        <a href="./" lang="ru" aria-current="page">RU</a>
+        <a href="../../en/" lang="en" hreflang="en">EN</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <!-- Шлем валькирии (вариант для сравнения) -->
+      <svg class="hero-wing hero-helmet" viewBox="-20 -30 800 560" aria-hidden="true" focusable="false"><path class="wf1" d="M394.8 343.9C470.8 315.0 601.6 306.0 656.2 324.4C637.2 344.1 489.7 369.3 397.2 366.1Z"/><path class="wf1" d="M394.3 332.3C472.4 289.5 612.8 256.2 674.8 264.1C657.2 287.2 501.0 339.7 400.2 353.9Z"/><path class="wf1" d="M393.9 321.1C470.0 263.5 613.2 203.5 679.7 199.6C664.4 225.9 507.3 308.0 403.1 341.4Z"/><path class="wf1" d="M393.5 310.1C463.0 238.6 600.7 152.4 668.1 136.2C656.3 165.3 507.6 276.2 406.0 328.7Z"/><path class="wf1" d="M393.4 299.3C451.6 216.6 575.5 107.6 640.2 80.1C632.9 111.0 501.8 246.3 408.6 315.7Z"/><path class="wf1" d="M393.4 288.8C436.7 198.9 540.0 73.2 598.8 36.5C596.8 67.8 490.9 220.3 411.1 302.5Z"/><path class="wf1" d="M393.7 278.4C419.9 186.4 498.4 52.0 549.2 8.7C552.8 39.0 476.6 199.5 413.3 289.1Z"/><path class="wf1" d="M394.2 268.2C403.2 179.3 455.4 44.2 497.2 -2.6C506.2 25.1 460.8 184.1 415.3 275.6Z"/><path class="wf1" d="M395.0 258.1C388.2 176.7 415.8 48.0 448.5 0.4C462.2 24.1 445.6 173.5 417.0 261.9Z"/><path class="wf2" d="M394.0 345.4C440.8 316.9 526.0 303.0 564.1 316.4C553.8 334.3 459.4 363.0 398.0 364.6Z"/><path class="wf2" d="M393.9 332.3C441.1 294.8 532.0 264.7 575.2 270.7C566.4 290.5 467.5 337.2 400.9 350.6Z"/><path class="wf2" d="M394.0 319.3C438.6 272.9 530.1 225.5 576.3 223.4C569.6 244.9 471.9 310.4 403.7 336.4Z"/><path class="wf2" d="M394.2 306.6C433.0 252.4 519.2 189.0 565.8 178.7C562.0 201.4 471.9 284.0 406.4 321.9Z"/><path class="wf2" d="M394.5 294.1C424.5 234.5 500.0 158.5 544.5 141.2C544.2 164.2 467.9 259.7 408.9 307.3Z"/><path class="wf2" d="M395.0 281.7C414.2 220.1 475.0 136.6 515.3 114.0C519.0 136.3 460.7 238.7 411.3 292.6Z"/><path class="wf2" d="M395.7 269.5C403.4 209.6 447.5 124.3 482.7 98.3C490.2 118.7 451.9 221.5 413.5 277.7Z"/><path class="wf2" d="M396.6 257.3C393.4 202.3 421.3 120.3 451.0 92.8C462.0 110.3 442.9 207.5 415.4 262.7Z"/><path class="wf3" d="M393.6 347.7C415.9 325.4 461.5 314.0 484.5 323.9C481.1 337.8 432.3 360.6 398.4 362.3Z"/><path class="wf3" d="M394.3 332.3C416.0 305.5 464.3 285.3 490.4 290.8C488.3 305.4 437.8 337.7 401.1 346.1Z"/><path class="wf3" d="M395.0 317.0C414.5 286.1 462.5 256.9 490.4 257.7C489.9 272.8 441.0 314.6 403.7 329.7Z"/><path class="wf3" d="M395.7 301.9C411.2 267.9 455.5 231.1 483.6 227.5C485.1 242.6 441.7 292.1 406.3 313.1Z"/><path class="wf3" d="M396.7 286.9C406.5 251.6 444.2 209.8 471.1 202.6C475.0 217.1 440.1 271.3 408.7 296.5Z"/><path class="wf3" d="M397.7 271.9C401.2 237.6 430.6 194.0 455.4 184.2C461.6 197.6 437.1 252.5 411.0 279.7Z"/><path class="wf3" d="M398.9 257.1C396.2 225.6 416.9 183.2 439.2 171.9C447.6 183.5 433.6 235.6 413.1 262.9Z"/><path class="wf1" d="M144.8 352.4C95.0 360.1 14.5 348.7 -16.2 330.5C-2.1 321.0 90.5 324.8 146.2 338.6Z"/><path class="wf1" d="M142.9 344.8C87.7 343.2 2.2 316.8 -28.4 293.0C-11.7 286.2 88.2 307.3 146.6 331.4Z"/><path class="wf1" d="M141.1 337.1C83.2 324.9 -3.1 282.3 -32.0 252.8C-13.5 249.2 88.8 289.3 146.8 324.5Z"/><path class="wf1" d="M139.3 329.2C81.9 306.3 -0.1 247.9 -25.4 213.2C-5.9 213.0 92.8 271.9 147.1 317.6Z"/><path class="wf1" d="M137.7 321.1C84.0 288.7 11.2 216.8 -8.6 178.0C10.8 181.1 100.2 256.3 147.2 311.0Z"/><path class="wf1" d="M136.2 312.9C88.9 273.0 29.5 191.5 16.6 150.5C35.1 156.5 110.2 243.8 147.1 304.4Z"/><path class="wf1" d="M134.8 304.6C95.8 259.9 52.4 173.7 47.1 132.7C64.0 141.1 121.7 234.9 147.0 298.0Z"/><path class="wf1" d="M133.5 296.3C103.6 249.7 76.8 163.9 79.0 125.1C94.1 135.1 133.4 229.7 146.7 291.7Z"/><path class="wf1" d="M132.5 287.8C111.3 241.9 100.1 161.0 109.0 126.3C122.1 137.3 144.1 227.8 146.2 285.4Z"/><path class="wf2" d="M144.3 351.4C110.5 355.8 58.8 342.1 40.6 325.0C50.9 317.4 111.6 325.0 146.8 339.6Z"/><path class="wf2" d="M142.5 342.8C105.2 340.6 50.7 317.1 33.2 296.5C45.4 290.9 110.5 310.1 146.8 331.4Z"/><path class="wf2" d="M140.7 333.9C101.9 324.8 47.7 290.9 32.0 266.9C45.6 263.7 111.4 295.2 146.8 323.4Z"/><path class="wf2" d="M139.1 325.0C100.9 309.0 50.7 265.6 38.1 238.9C52.3 238.1 114.7 281.1 146.7 315.5Z"/><path class="wf2" d="M137.5 316.0C102.3 294.3 59.3 243.6 50.9 215.3C65.1 216.6 120.1 268.8 146.5 307.7Z"/><path class="wf2" d="M136.0 306.8C105.4 281.1 72.0 226.5 68.7 198.0C82.3 201.2 127.1 259.0 146.1 300.1Z"/><path class="wf2" d="M134.7 297.6C109.4 269.9 86.8 214.9 88.6 187.8C101.3 192.4 134.5 251.8 145.7 292.5Z"/><path class="wf2" d="M133.5 288.3C113.8 260.4 101.5 208.1 108.1 183.9C119.6 189.5 141.5 246.9 145.2 284.9Z"/><path class="wf3" d="M144.0 350.0C124.7 353.1 97.7 342.2 89.8 328.8C96.6 323.1 129.3 329.5 147.0 341.0Z"/><path class="wf3" d="M142.4 340.0C121.0 339.3 92.9 323.1 85.8 308.2C93.8 303.7 128.7 316.5 146.6 331.4Z"/><path class="wf3" d="M140.7 329.8C118.5 325.2 91.1 303.7 85.5 287.4C94.3 284.4 129.2 303.6 146.2 321.9Z"/><path class="wf3" d="M139.2 319.5C117.5 311.4 92.8 285.6 89.3 268.4C98.6 266.8 131.1 291.5 145.7 312.6Z"/><path class="wf3" d="M137.7 309.2C117.7 298.4 97.5 270.0 96.8 252.7C106.1 252.4 134.1 280.8 145.1 303.3Z"/><path class="wf3" d="M136.2 298.8C118.7 286.5 104.1 257.4 106.3 241.0C115.5 241.7 137.7 271.6 144.5 294.0Z"/><path class="wf3" d="M134.9 288.4C120.1 275.5 111.1 247.7 116.2 233.0C124.9 234.5 141.2 263.8 143.7 284.8Z"/><path class="wsh" d="M416.8 352.8L630.3 328.8"/><path class="wsh" d="M419.5 337.1L647.4 273.3"/><path class="wsh" d="M421.1 321.0L652.1 213.9"/><path class="wsh" d="M421.4 304.9L642.0 155.6"/><path class="wsh" d="M420.3 289.5L617.1 103.8"/><path class="wsh" d="M418.2 275.1L580.2 63.2"/><path class="wsh" d="M415.4 261.9L535.7 36.8"/><path class="wsh" d="M412.4 250.0L489.2 25.3"/><path class="wsh" d="M409.7 239.3L445.5 26.6"/><path class="wsh" d="M409.5 352.1L547.5 321.4"/><path class="wsh" d="M411.7 336.0L557.8 278.8"/><path class="wsh" d="M413.2 319.7L559.1 234.8"/><path class="wsh" d="M413.7 303.6L549.9 193.2"/><path class="wsh" d="M413.3 288.1L531.0 157.9"/><path class="wsh" d="M412.3 273.4L505.0 131.9"/><path class="wsh" d="M411.0 259.6L475.9 116.3"/><path class="wsh" d="M409.8 246.7L447.6 109.8"/><path class="wsh" d="M132.6 344.1L0.0 331.2"/><path class="wsh" d="M130.9 334.4L-10.9 296.7"/><path class="wsh" d="M130.0 324.4L-14.1 259.8"/><path class="wsh" d="M129.8 314.5L-8.1 223.5"/><path class="wsh" d="M130.4 304.9L7.1 191.2"/><path class="wsh" d="M131.8 295.9L29.7 165.8"/><path class="wsh" d="M133.5 287.8L57.1 149.2"/><path class="wsh" d="M135.4 280.4L85.9 141.7"/><path class="wsh" d="M137.1 273.7L112.9 142.2"/><path class="wsh" d="M137.2 343.7L51.2 326.3"/><path class="wsh" d="M135.8 333.7L44.6 299.9"/><path class="wsh" d="M134.9 323.6L43.5 272.5"/><path class="wsh" d="M134.6 313.6L49.0 246.5"/><path class="wsh" d="M134.8 304.0L60.5 224.5"/><path class="wsh" d="M135.4 294.9L76.5 208.2"/><path class="wsh" d="M136.2 286.4L94.4 198.2"/><path class="wsh" d="M137.0 278.3L111.9 194.0"/><path class="hm1" d="M140 382C136 250 196 196 270 196C344 196 404 250 400 382Z"/><path class="hm2" d="M270 198C262 250 262 320 270 380C278 320 278 250 270 198Z"/><path class="hm2" d="M128 372C200 352 340 352 412 372L408 410C340 392 200 392 132 410Z"/><path class="hm3" d="M256 398L284 398L280 486C277 496 263 496 260 486Z"/><path class="hm1" d="M142 404C150 440 166 470 190 492L214 480C196 456 188 430 184 398Z"/><path class="hm1" d="M398 404C390 440 374 470 350 492L326 480C344 456 352 430 356 398Z"/><circle class="hm3" cx="160.0" cy="394.9" r="4.5"/><circle class="hm3" cx="200.0" cy="386.6" r="4.5"/><circle class="hm3" cx="240.0" cy="382.0" r="4.5"/><circle class="hm3" cx="300.0" cy="382.0" r="4.5"/><circle class="hm3" cx="340.0" cy="386.6" r="4.5"/><circle class="hm3" cx="380.0" cy="394.9" r="4.5"/></svg>
+      <div class="wrap hero-grid">
+        <div>
+          <p class="label">Программирование и ИИ</p>
+          <h1>Сайты, Telegram-боты и ИИ-автоматизация для малого бизнеса</h1>
+          <p class="lead">Помогаю мастерам, студиям и небольшим компаниям принимать заявки и отвечать клиентам без ручной переписки. Использую нейросети там, где они экономят время, и проверяю результат сам.</p>
+          <div class="actions">
+            <a class="btn" href="mailto:aiworkingmaksim@gmail.com?subject=Заявка%20с%20сайта">Написать на почту</a>
+            <a class="btn btn-ghost" href="#raboty">Смотреть работы</a>
+          </div>
+          <p class="note">Первые проекты беру по специальной цене в обмен на отзыв.</p>
+        </div>
+
+        <div class="demo" id="demo-app">
+          <div class="demo-window">
+            <div class="demo-bar"><i></i><i></i><i></i><span class="demo-stage">Задача · 1/6</span><span class="demo-badge">демо</span></div>
+            <div class="demo-progress" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="demo-log"></div>
+            <form class="demo-form" novalidate>
+              <div class="demo-input-row">
+                <input type="text" maxlength="200" aria-label="Опишите свою задачу" placeholder="Опишите свою задачу…">
+                <button class="btn" type="submit" aria-label="Запустить">→</button>
+              </div>
+              <p class="form-error demo-error" role="alert" hidden></p>
+            </form>
+          </div>
+          <p class="demo-foot">Демо показывает этапы работы. Оплата ненастоящая, реальные сроки и цены — в таблице услуг.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="uslugi">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="label">Услуги</p>
+          <h2>Что я делаю</h2>
+          <p>Цены указаны «от» и зависят от задачи. Точную стоимость и срок называю до начала работы. Цены в долларах пересчитаны по курсу ЦБ РФ на 22.10.2026 (81,91 ₽ за $1) и округлены.</p>
+        </div>
+        <div class="services">
+          <div class="service">
+            <h3>Одностраничный сайт</h3>
+            <p>Прайс, преимущества, контакты и кнопка записи. Хорошо работает на телефоне, публикуется бесплатно.</p>
+            <div class="meta">от 3 000 ₽ / $37<span>2–5 дней</span></div>
+          </div>
+          <div class="service">
+            <h3>Telegram-бот для записи и заявок</h3>
+            <p>Клиент выбирает услугу и время, а вам приходит готовая заявка. Можно подключить нейросеть для ответов на вопросы.</p>
+            <div class="meta">от 3 000 ₽ / $37<span>3–7 дней</span></div>
+          </div>
+          <div class="service">
+            <h3>Автоматизация рутины</h3>
+            <p>Заявки из форм попадают в таблицу и в Telegram, напоминания клиентам уходят сами.</p>
+            <div class="meta">от 2 000 ₽ / $24<span>1–3 дня</span></div>
+          </div>
+          <div class="service">
+            <h3>Настройка сервера и запуск</h3>
+            <p>Арендую и настраиваю VPS, переношу бота или сайт, включаю автозапуск, чтобы всё работало круглосуточно без вашего компьютера. Аренда сервера оплачивается отдельно.</p>
+            <div class="meta">от 1 500 ₽ / $18<span>1 день</span></div>
+          </div>
+          <div class="service">
+            <h3>Написание и исправление кода</h3>
+            <p>Скрипты на Python и JavaScript, исправление ошибок, доработка чужого кода. Объясняю, что было не так и что изменено.</p>
+            <div class="meta">от 500 ₽ / $6<span>за задачу, от 1 дня</span></div>
+          </div>
+          <div class="service">
+            <h3>Доработка готового сайта</h3>
+            <p>Правки текста и дизайна, новые разделы, форма отзывов, подключение Яндекс Метрики, иконки и своего домена.</p>
+            <div class="meta">от 1 000 ₽ / $12<span>1–2 дня</span></div>
+          </div>
+          <div class="service">
+            <h3>3D-моделирование</h3>
+            <p>Модели деталей для 3D-печати (STL) по вашим размерам или эскизу, интерактивные 3D-сцены и превью для сайта.</p>
+            <div class="meta">от 1 500 ₽ / $18<span>1–3 дня</span></div>
+          </div>
+          <div class="service">
+            <h3>Таблицы и отчёты</h3>
+            <p>Excel и Google Таблицы с формулами: учёт заявок, клиентов и расходов, графики и сводки, которые считаются сами.</p>
+            <div class="meta">от 1 000 ₽ / $12<span>1–2 дня</span></div>
+          </div>
+          <div class="service">
+            <h3>Сбор и обработка данных</h3>
+            <p>Сбор данных из открытых источников, чистка и объединение списков, перенос данных между таблицами и сервисами.</p>
+            <div class="meta">от 1 500 ₽ / $18<span>1–3 дня</span></div>
+          </div>
+          <div class="service">
+            <h3>Презентации и документы</h3>
+            <p>Коммерческие предложения, прайсы, презентации и инструкции: аккуратная вёрстка, готовые файлы для печати или отправки.</p>
+            <div class="meta">от 1 000 ₽ / $12<span>1–2 дня</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="raboty">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="label">Работы</p>
+          <h2>Что уже сделано</h2>
+          <p>Сайт и бот сделаны для вымышленной студии маникюра, чтобы показать результат на понятном примере. 3D-модель готова к печати.</p>
+        </div>
+        <div class="works">
+          <article class="work">
+            <h3>Сайт студии маникюра</h3>
+            <p>Одностраничный сайт: услуги и цены, преимущества, форма записи и кнопка перехода в Telegram-бота.</p>
+            <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>GitHub Pages</li></ul>
+            <a class="go" href="https://aiworkhelper.github.io/tudio-demo1.1/" target="_blank" rel="noopener">Открыть сайт →</a>
+          </article>
+          <article class="work">
+            <h3>Telegram-бот записи</h3>
+            <p>Ведёт клиента по шагам: услуга, день, время, имя и телефон. Присылает готовую заявку владельцу. Демо-бот отвечает не круглосуточно.</p>
+            <ul class="tags"><li>Python</li><li>aiogram</li><li>Telegram Bot API</li></ul>
+            <a class="go" href="https://t.me/AIsontrabot" target="_blank" rel="noopener">Открыть бота →</a>
+          </article>
+          <article class="work">
+            <h3>3D-модель подставки для телефона</h3>
+            <p>Параметрическая модель для 3D-печати: размеры меняются под конкретный телефон. Интерактивное 3D-превью, чертёж профиля и STL-файл.</p>
+            <ul class="tags"><li>Python</li><li>3D-печать</li><li>STL</li><li>WebGL</li></ul>
+            <a class="go" href="../../3d/">Покрутить модель →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="label">Как работаю</p>
+          <h2>Четыре шага до результата</h2>
+        </div>
+        <ol class="steps">
+          <li><h3>Разбираем задачу</h3><p>Вы рассказываете, что нужно. Я уточняю детали и предлагаю решение.</p></li>
+          <li><h3>Договариваемся</h3><p>Называю цену и срок. Начинаем после вашего согласия.</p></li>
+          <li><h3>Делаю и показываю</h3><p>Показываю промежуточный результат, чтобы вы могли поправить его заранее.</p></li>
+          <li><h3>Сдаю и поддерживаю</h3><p>Передаю всё, объясняю, как пользоваться, и вношу мелкие правки.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="otzyvy">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="label">Отзывы</p>
+          <h2>Отзывы клиентов</h2>
+          <p>Отзыв появляется на сайте после моей проверки и только с согласия автора.</p>
+        </div>
+        <div class="reviews-grid">
+          <div class="reviews" id="reviews-list"></div>
+
+          <form class="review-form" id="review-form" novalidate>
+            <h3>Оставить отзыв</h3>
+            <label>Ваше имя
+              <input type="text" id="r-name" maxlength="60" autocomplete="name" required>
+            </label>
+            <label>Оценка
+              <select id="r-rating">
+                <option value="5">5 — отлично</option>
+                <option value="4">4 — хорошо</option>
+                <option value="3">3 — нормально</option>
+                <option value="2">2 — плохо</option>
+                <option value="1">1 — очень плохо</option>
+              </select>
+            </label>
+            <label>Отзыв
+              <textarea id="r-text" maxlength="800" required placeholder="Что вам сделали и что понравилось или нет"></textarea>
+            </label>
+            <label class="check">
+              <input type="checkbox" id="r-consent">
+              <span>Согласен(на) на публикацию отзыва на сайте с указанным именем</span>
+            </label>
+            <button class="btn" type="submit">Подготовить отзыв</button>
+            <p class="form-error" id="r-error" role="alert" hidden></p>
+
+            <div class="form-result" id="r-result" role="status" hidden>
+              <p><strong>Отзыв ещё не отправлен.</strong> Нажмите «Открыть письмо» и отправьте его из своей почты. Если письмо не открылось, скопируйте текст ниже и отправьте на aiworkingmaksim@gmail.com.</p>
+              <a class="btn" id="r-mail" href="#">Открыть письмо</a>
+              <label>Текст письма
+                <textarea id="r-body" readonly></textarea>
+              </label>
+              <button class="btn btn-ghost" id="r-copy" type="button">Скопировать текст</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="kontakty">
+      <div class="wrap">
+        <div class="contact">
+          <h2>Расскажите о своей задаче</h2>
+          <p>Напишите на почту, что нужно сделать, и я отвечу с оценкой цены и срока.</p>
+          <p class="mail" id="email-text">aiworkingmaksim@gmail.com</p>
+          <div class="actions">
+            <a class="btn" href="mailto:aiworkingmaksim@gmail.com?subject=Заявка%20с%20сайта">Написать на почту</a>
+            <button class="btn btn-ghost" id="copy-email" type="button">Скопировать адрес</button>
+            <!-- ЗАМЕНИТЕ ссылку на GitHub, если у вас другой аккаунт -->
+            <a class="btn btn-ghost" href="https://github.com/aiworkhelper" target="_blank" rel="noopener">Мой GitHub</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">© <span id="year"></span> Максим Helper<br>Сайт использует Яндекс Метрику для статистики посещений.</div>
+  </footer>
+
+  <script>
+    // Подставляем текущий год в подвал.
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Кнопка «Скопировать адрес». Если браузер не разрешает копирование,
+    // адрес просто выделяется, и его можно скопировать вручную (Ctrl+C).
+    var copyBtn = document.getElementById('copy-email');
+    var emailText = document.getElementById('email-text');
+    function selectEmail() {
+      var range = document.createRange();
+      range.selectNodeContents(emailText);
+      var sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      copyBtn.textContent = 'Адрес выделен, нажмите Ctrl+C';
+    }
+    copyBtn.addEventListener('click', function () {
+      var done = function () {
+        copyBtn.textContent = 'Адрес скопирован';
+        setTimeout(function () { copyBtn.textContent = 'Скопировать адрес'; }, 2500);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(emailText.textContent.trim()).then(done, selectEmail);
+      } else {
+        selectEmail();
+      }
+    });
+
+    // ---------- ОТЗЫВЫ ----------
+    // Одобренные отзывы добавляйте сюда: по одному объекту на отзыв.
+    // Пример: { name: 'Анна', rating: 5, text: 'Бот работает отлично.', date: '2026-11-01' },
+    var REVIEWS = [];
+
+    var REVIEW_EMAIL = 'aiworkingmaksim@gmail.com';
+    var reviewsList = document.getElementById('reviews-list');
+
+    function renderReviews() {
+      reviewsList.textContent = '';
+      if (REVIEWS.length === 0) {
+        var empty = document.createElement('div');
+        empty.className = 'reviews-empty';
+        var title = document.createElement('strong');
+        title.textContent = 'Отзывов пока нет';
+        var note = document.createElement('span');
+        note.textContent = 'Здесь появятся отзывы заказчиков после первых проектов. Если вы уже работали со мной, оставьте отзыв в форме.';
+        empty.appendChild(title);
+        empty.appendChild(note);
+        reviewsList.appendChild(empty);
+        return;
+      }
+      REVIEWS.forEach(function (r) {
+        var fig = document.createElement('figure');
+        fig.className = 'review';
+        var stars = document.createElement('p');
+        stars.className = 'stars';
+        stars.setAttribute('role', 'img');
+        stars.setAttribute('aria-label', 'Оценка ' + r.rating + ' из 5');
+        stars.textContent = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+        var quote = document.createElement('blockquote');
+        quote.textContent = r.text;
+        var cap = document.createElement('figcaption');
+        cap.textContent = r.name + (r.date ? ', ' + r.date : '');
+        fig.appendChild(stars);
+        fig.appendChild(quote);
+        fig.appendChild(cap);
+        reviewsList.appendChild(fig);
+      });
+    }
+    renderReviews();
+
+    // Форма отзыва. Сервера у сайта нет, поэтому форма собирает текст письма,
+    // а клиент сам отправляет его со своей почты. Вы проверяете отзыв и добавляете его в REVIEWS.
+    var rForm = document.getElementById('review-form');
+    var rError = document.getElementById('r-error');
+    var rResult = document.getElementById('r-result');
+    var rBody = document.getElementById('r-body');
+    var rMail = document.getElementById('r-mail');
+    var rCopy = document.getElementById('r-copy');
+
+    function showReviewError(message, fieldId) {
+      rError.textContent = message;
+      rError.hidden = false;
+      document.getElementById(fieldId).focus();
+    }
+
+    rForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      var name = document.getElementById('r-name').value.trim();
+      var rating = document.getElementById('r-rating').value;
+      var text = document.getElementById('r-text').value.trim();
+      var consent = document.getElementById('r-consent').checked;
+
+      rResult.hidden = true;
+      if (name.length < 2) { showReviewError('Укажите имя, хотя бы 2 символа.', 'r-name'); return; }
+      if (text.length < 10) { showReviewError('Напишите отзыв подлиннее, хотя бы 10 символов.', 'r-text'); return; }
+      if (!consent) { showReviewError('Отметьте согласие на публикацию: без него отзыв разместить нельзя.', 'r-consent'); return; }
+      rError.hidden = true;
+
+      var body = 'Имя: ' + name + '\nОценка: ' + rating + ' из 5\nОтзыв: ' + text +
+                 '\nСогласие на публикацию на сайте: да';
+      rBody.value = body;
+      rMail.href = 'mailto:' + REVIEW_EMAIL + '?subject=' + encodeURIComponent('Отзыв с сайта') +
+                   '&body=' + encodeURIComponent(body);
+      rResult.hidden = false;
+      rMail.focus();
+    });
+
+    rCopy.addEventListener('click', function () {
+      var done = function () {
+        rCopy.textContent = 'Текст скопирован';
+        setTimeout(function () { rCopy.textContent = 'Скопировать текст'; }, 2500);
+      };
+      var fallback = function () {
+        rBody.focus();
+        rBody.select();
+        rCopy.textContent = 'Текст выделен, нажмите Ctrl+C';
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(rBody.value).then(done, fallback);
+      } else {
+        fallback();
+      }
+    });
+  </script>
+  <script src="../../demo.js?v=20261022b"></script>
+  <script src="../../anim.js?v=20261022b"></script>
+</body>
+</html>
