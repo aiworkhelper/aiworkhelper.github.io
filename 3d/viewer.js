@@ -111,7 +111,7 @@
 
   // ---------- загрузка STL (двоичный формат) ----------
   var part = null;
-  fetch('phone-stand.stl').then(function (r) {
+  fetch(box.getAttribute('data-stl') || 'phone-stand.stl').then(function (r) {
     if (!r.ok) throw new Error('STL ' + r.status);
     return r.arrayBuffer();
   }).then(function (buf) {
@@ -177,7 +177,7 @@
   btn.addEventListener('click', function () {
     showPhone = !showPhone;
     btn.setAttribute('aria-pressed', String(showPhone));
-    btn.textContent = showPhone ? 'Скрыть телефон' : 'Показать телефон';
+    btn.textContent = showPhone ? (btn.getAttribute('data-hide') || 'Скрыть телефон') : (btn.getAttribute('data-show') || 'Показать телефон');
   });
   document.getElementById('resetView').addEventListener('click', function () { idle = 0; resetView(); });
 

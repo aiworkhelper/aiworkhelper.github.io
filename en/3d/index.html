@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>3D Model: Phone Stand</title>
+  <meta name="description" content="3D modeling example: a parametric phone stand for 3D printing. Interactive preview, profile drawing and a downloadable STL.">
+  <link rel="canonical" href="https://aiworkhelper.github.io/en/3d/">
+  <link rel="alternate" hreflang="ru" href="https://aiworkhelper.github.io/3d/">
+  <link rel="alternate" hreflang="en" href="https://aiworkhelper.github.io/en/3d/">
+  <link rel="alternate" hreflang="x-default" href="https://aiworkhelper.github.io/3d/">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@500;600;700&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+
+  <!-- Яндекс.Метрика -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();
+    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js?id=113726093", "ym");
+    ym(113726093, 'init', { ssr: true, webvisor: false, clickmap: true, accurateTrackBounce: true, trackLinks: true });
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/113726093" style="position:absolute; left:-9999px;" alt=""></div></noscript>
+
+  <style>
+    :root {
+      --bg: #f0f2f8;
+      --surface: #ffffff;
+      --ink: #12172b;
+      --muted: #565d78;
+      --accent: #2f4bff;
+      --accent-ink: #ffffff;
+      --line: #d9deec;
+      --stage: #e6e9f3;
+      --font-title: 'Geologica', 'Trebuchet MS', system-ui, sans-serif;
+      --font-text: 'Golos Text', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', Consolas, monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0d1120;
+        --surface: #151b30;
+        --ink: #edf0fb;
+        --muted: #9aa3c0;
+        --accent: #8196ff;
+        --accent-ink: #0d1120;
+        --line: #273050;
+        --stage: #10162a;
+        color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-text); font-size: 17px; line-height: 1.6; }
+    a { color: inherit; }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+    h1, h2 { font-family: var(--font-title); line-height: 1.12; margin: 0; font-weight: 600; letter-spacing: -0.01em; text-wrap: balance; }
+    h1 { font-size: clamp(1.8rem, 5.4vw, 2.8rem); margin-bottom: 14px; }
+    h2 { font-size: 1.3rem; margin-bottom: 14px; }
+    .label { font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; }
+    .lead { color: var(--muted); max-width: 40rem; margin: 0; }
+    a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+    header { border-bottom: 1px solid var(--line); }
+    .bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 16px; flex-wrap: wrap; }
+    .logo { font-family: var(--font-mono); font-weight: 500; text-decoration: none; }
+    .back { color: var(--muted); text-decoration: none; font-weight: 500; }
+    .back:hover { color: var(--ink); }
+    .bar-right { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+
+    /* Переключатель языка RU / EN */
+    .lang { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 3px; flex: none; }
+    .lang a { font-family: var(--font-mono); font-size: 0.82rem; font-weight: 500; text-decoration: none; color: var(--muted); padding: 4px 11px; border-radius: 999px; line-height: 1.4; }
+    .lang a:hover { color: var(--ink); }
+    .lang a[aria-current="page"] { background: var(--accent); color: var(--accent-ink); }
+    .lang a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+    .intro { padding: 44px 0 24px; }
+
+    .viewer { position: relative; background: var(--stage); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; aspect-ratio: 4 / 3; max-height: 72vh; width: 100%; touch-action: none; }
+    .viewer canvas { display: block; width: 100%; height: 100%; cursor: grab; }
+    .viewer canvas:active { cursor: grabbing; }
+    .hint { position: absolute; left: 14px; bottom: 12px; margin: 0; font-family: var(--font-mono); font-size: 0.76rem; color: var(--muted); pointer-events: none; }
+    .fallback { position: absolute; inset: 0; display: none; place-items: center; padding: 24px; text-align: center; color: var(--muted); }
+    .viewer.failed .fallback { display: grid; }
+    .viewer.failed .hint { display: none; }
+    .hint .short { display: none; }
+    @media (max-width: 600px) {
+      .viewer { aspect-ratio: 1 / 1; }
+      .hint .long { display: none; }
+      .hint .short { display: inline; }
+    }
+
+    .toolbar { display: flex; flex-wrap: wrap; gap: 10px; margin: 14px 0 0; }
+    .btn { display: inline-block; padding: 11px 20px; border-radius: 10px; background: var(--accent); color: var(--accent-ink); font: 600 0.95rem var(--font-text); text-decoration: none; border: 2px solid var(--accent); cursor: pointer; }
+    .btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+    .btn-ghost:hover { border-color: var(--ink); }
+    .btn[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+
+    .details { display: grid; gap: 18px; grid-template-columns: 1fr; padding: 36px 0 56px; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 24px; min-width: 0; }
+    .card p { margin: 0 0 10px; color: var(--muted); }
+    .card p:last-child { margin-bottom: 0; }
+    dl.specs { display: grid; grid-template-columns: auto 1fr; gap: 8px 18px; margin: 0; }
+    dl.specs dt { color: var(--muted); }
+    dl.specs dd { margin: 0; font-family: var(--font-mono); font-size: 0.92rem; font-variant-numeric: tabular-nums; }
+    .drawing { width: 100%; height: auto; color: var(--ink); }
+    .drawing .part { fill: var(--accent); fill-opacity: 0.16; stroke: var(--accent); stroke-width: 0.6; }
+    .drawing .dim { stroke: var(--muted); stroke-width: 0.35; fill: none; }
+    .drawing text { fill: var(--muted); font-family: var(--font-mono); font-size: 4.2px; }
+    ul.plain { margin: 0; padding-left: 1.1em; color: var(--muted); }
+    ul.plain li { margin-bottom: 6px; }
+    code { font-family: var(--font-mono); font-size: 0.88em; }
+
+    footer { border-top: 1px solid var(--line); padding: 24px 0 36px; color: var(--muted); font-size: 0.92rem; }
+
+    @media (min-width: 760px) {
+      .details { grid-template-columns: 1fr 1fr; }
+      .details .wide { grid-column: 1 / -1; }
+    }
+  </style>
+
+</head>
+<body>
+  <header>
+    <div class="wrap bar">
+      <a class="logo" href="../">Maksim Helper</a>
+      <div class="bar-right">
+        <a class="back" href="../#raboty">← All work</a>
+        <div class="lang" role="group" aria-label="Site language">
+          <a href="../../3d/" lang="ru" hreflang="ru">RU</a>
+          <a href="./" lang="en" aria-current="page">EN</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro">
+      <div class="wrap">
+        <p class="label">Example · 3D modeling</p>
+        <h1>Phone stand for 3D printing</h1>
+        <p class="lead">A parametric model: width, tilt, lip height and wall thickness are set as numbers, and the model rebuilds for a specific phone. Rotate it with your mouse or finger.</p>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <div class="viewer" id="viewer" data-stl="../../3d/phone-stand.stl">
+        <p class="hint"><span class="long">Rotate: drag · zoom: mouse wheel or two fingers</span><span class="short">Drag to rotate · pinch to zoom</span></p>
+        <div class="fallback"><p>The 3D preview did not load. You can download the model below or look at the profile drawing.</p></div>
+      </div>
+      <div class="toolbar">
+        <button class="btn btn-ghost" id="togglePhone" type="button" aria-pressed="false" data-show="Show phone" data-hide="Hide phone">Show phone</button>
+        <button class="btn btn-ghost" id="resetView" type="button">Reset view</button>
+        <a class="btn" href="../../3d/phone-stand.stl" download>Download STL</a>
+        <a class="btn btn-ghost" href="../../3d/stand.py" download>Model source (Python)</a>
+      </div>
+    </div>
+
+    <div class="wrap details">
+      <section class="card">
+        <h2>Specifications</h2>
+        <dl class="specs">
+          <dt>Dimensions</dt><dd>70 × 93.5 × 86 mm</dd>
+          <dt>Back tilt</dt><dd>65°</dd>
+          <dt>Phone slot</dt><dd>14 mm</dd>
+          <dt>Wall thickness</dt><dd>4 mm</dd>
+          <dt>Volume</dt><dd>59 cm³</dd>
+          <dt>PLA plastic</dt><dd>up to ~73 g</dd>
+          <dt>Format</dt><dd>STL, millimeters</dd>
+        </dl>
+      </section>
+
+      <section class="card">
+        <h2>How to print</h2>
+        <ul class="plain">
+          <li>Lay it on its side, flat face down on the bed: no supports needed.</li>
+          <li>0.2 mm layers, 3–4 perimeters, 20–30% infill.</li>
+          <li>The mesh was checked in code: it is watertight and ready for a slicer.</li>
+        </ul>
+      </section>
+
+      <section class="card wide">
+        <h2>Profile drawing</h2>
+        <svg class="drawing" viewBox="-16 -2 126 116" role="img" aria-label="Side profile of the stand: depth 93.5 mm, height 86 mm, lip 16 mm, slot 14 mm, back tilt 65 degrees">
+          <path class="part" d="M1.60 74.00 L1.19 74.05 L0.80 74.21 L0.47 74.47 L0.21 74.80 L0.05 75.19 L0.00 75.60 L0.00 88.40 L0.05 88.81 L0.21 89.20 L0.47 89.53 L0.80 89.79 L1.19 89.95 L1.60 90.00 L20.25 90.00 L20.56 89.97 L20.85 89.89 L21.11 89.75 L21.35 89.56 L21.55 89.34 L21.70 89.08 L56.36 14.76 L56.72 14.26 L57.24 13.94 L57.850 13.84 L58.45 13.97 L58.95 14.32 L59.29 14.83 L89.44 89.00 L89.58 89.28 L89.78 89.53 L90.02 89.73 L90.30 89.88 L90.60 89.97 L90.92 90.00 L92.22 90.00 L92.63 89.93 L93.01 89.73 L93.30 89.42 L93.48 89.04 L93.52 88.61 L93.43 88.20 L59.54 4.83 L59.21 4.32 L58.70 3.97 L58.10 3.83 L57.50 3.94 L56.97 4.26 L56.61 4.76 L19.16 85.08 L19.00 85.34 L18.80 85.56 L18.57 85.75 L18.30 85.89 L18.01 85.97 L17.71 86.00 L5.60 86.00 L5.19 85.95 L4.80 85.79 L4.47 85.53 L4.21 85.20 L4.05 84.81 L4.00 84.40 L4.00 75.60 L3.95 75.19 L3.79 74.80 L3.53 74.47 L3.20 74.21 L2.81 74.05 L2.40 74.00 Z"/>
+          <!-- глубина -->
+          <path class="dim" d="M0 92 V102 M93.5 92 V102 M0 99 H93.5"/>
+          <text x="46.75" y="106" text-anchor="middle">93.5</text>
+          <!-- высота -->
+          <path class="dim" d="M-2 3.8 H-11 M-2 90 H-11 M-8 3.8 V90"/>
+          <text x="-10" y="47" text-anchor="middle" transform="rotate(-90 -10 47)">86</text>
+          <!-- губа -->
+          <path class="dim" d="M-1 74 H-5 M-5 74 V90"/>
+          <text x="-6.2" y="83.5" text-anchor="end">16</text>
+          <!-- ложе -->
+          <path class="dim" d="M4 80 H18"/>
+          <text x="11" y="78.5" text-anchor="middle">14</text>
+          <!-- угол -->
+          <path class="dim" d="M24 86 A10 10 0 0 0 26 78.9"/>
+          <text x="27.5" y="83.5">65°</text>
+        </svg>
+        <p>The stand is 70 mm wide. All dimensions can be changed at the top of <code>stand.py</code>, then rebuild the model with <code>python stand.py</code>.</p>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">Maksim Helper · portfolio example</div>
+  </footer>
+
+  <script>
+    // если библиотека 3D не загрузилась (нет сети или CDN), показываем запасной текст
+    setTimeout(function () {
+      var v = document.getElementById('viewer');
+      if (!v.querySelector('canvas')) v.classList.add('failed');
+    }, 8000);
+  </script>
+  <script src="../../3d/viewer.js"></script>
+</body>
+</html>

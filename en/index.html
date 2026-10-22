@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<!-- English version of the site. The Russian original is ../index.html -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bot and AI Automation Developer</title>
+  <meta name="description" content="I build websites, Telegram bots and AI automation, set up servers, write and fix code, make 3D models, spreadsheets and documents. Portfolio, prices and contacts.">
+
+  <!-- Значок сайта «Ai»: SVG для современных браузеров, ICO как запасной вариант, PNG для экрана «домой» на телефоне -->
+  <link rel="canonical" href="https://aiworkhelper.github.io/en/">
+  <link rel="alternate" hreflang="ru" href="https://aiworkhelper.github.io/">
+  <link rel="alternate" hreflang="en" href="https://aiworkhelper.github.io/en/">
+  <link rel="alternate" hreflang="x-default" href="https://aiworkhelper.github.io/">
+
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@500;600;700&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+
+  <style>
+    /* ---------- 1. ЦВЕТА И ШРИФТЫ ----------
+       Светлая тема по умолчанию, тёмная включается сама, если так настроен телефон или компьютер. */
+    :root {
+      --bg: #f0f2f8;
+      --surface: #ffffff;
+      --ink: #12172b;
+      --muted: #565d78;
+      --accent: #2f4bff;
+      --accent-ink: #ffffff;       /* цвет текста на кнопке */
+      --line: #d9deec;
+      --danger: #b3261e;           /* цвет сообщений об ошибке в форме */
+      --code-bg: #0f1530;         /* карточка с кодом всегда тёмная */
+      --code-ink: #dfe5ff;
+      --code-dim: #7d89b8;
+      --code-key: #9db0ff;
+      --code-str: #ffc477;
+      --font-title: 'Geologica', 'Trebuchet MS', system-ui, sans-serif;
+      --font-text: 'Golos Text', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', Consolas, monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0d1120;
+        --surface: #151b30;
+        --ink: #edf0fb;
+        --muted: #9aa3c0;
+        --accent: #8196ff;
+        --accent-ink: #0d1120;
+        --line: #273050;
+        --danger: #ff8a80;
+        color-scheme: dark;
+      }
+    }
+
+    /* ---------- 2. БАЗА ---------- */
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-text);
+      font-size: 17px;
+      line-height: 1.6;
+    }
+    a { color: inherit; }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+    h1, h2, h3 { font-family: var(--font-title); line-height: 1.12; margin: 0; font-weight: 600; letter-spacing: -0.01em; text-wrap: balance; }
+    h2 { font-size: clamp(1.5rem, 4vw, 2rem); }
+    section { padding: 56px 0; }
+    .label { font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; }
+    a:focus-visible, .btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+    /* ---------- 3. ШАПКА ---------- */
+    header { border-bottom: 1px solid var(--line); }
+    .bar { display: flex; align-items: center; justify-content: space-between; gap: 10px 16px; padding-block: 16px; flex-wrap: wrap; }
+    .logo { font-family: var(--font-mono); font-weight: 500; text-decoration: none; }  /* ЗАМЕНИТЕ имя в HTML ниже */
+    nav { display: flex; gap: 4px 20px; flex-wrap: wrap; }
+    nav a { text-decoration: none; color: var(--muted); font-weight: 500; }
+    nav a:hover { color: var(--ink); }
+
+    /* Переключатель языка RU / EN в правом верхнем углу */
+    .lang { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 3px; flex: none; }
+    .lang a { font-family: var(--font-mono); font-size: 0.82rem; font-weight: 500; text-decoration: none; color: var(--muted); padding: 4px 11px; border-radius: 999px; line-height: 1.4; }
+    .lang a:hover { color: var(--ink); }
+    .lang a[aria-current="page"] { background: var(--accent); color: var(--accent-ink); }
+    .lang a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+    .bar .lang { order: 2; }
+    .bar nav { order: 3; width: 100%; }
+    @media (min-width: 900px) {
+      .bar nav { order: 1; width: auto; margin-left: auto; }
+      .bar .lang { margin-left: 8px; }
+    }
+
+    /* ---------- 4. КНОПКИ ---------- */
+    .btn {
+      display: inline-block; padding: 14px 26px; border-radius: 10px;
+      background: var(--accent); color: var(--accent-ink);
+      font-weight: 600; text-decoration: none; border: 2px solid var(--accent);
+      transition: transform 0.15s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    button.btn { font-family: inherit; font-size: inherit; line-height: inherit; cursor: pointer; }
+
+    /* ---------- 5. ГЛАВНЫЙ ЭКРАН ---------- */
+    .hero { padding: 56px 0 24px; }
+    .hero-grid { display: grid; gap: 40px; grid-template-columns: 1fr; align-items: center; }
+    .hero h1 { font-size: clamp(2rem, 6.4vw, 3.4rem); margin-bottom: 20px; }
+    .hero p.lead { font-size: 1.12rem; color: var(--muted); max-width: 33rem; margin: 0 0 28px; }
+    .hero .note { margin: 18px 0 0; font-size: 0.92rem; color: var(--muted); }
+
+    .code { background: var(--code-bg); color: var(--code-ink); border-radius: 14px; overflow: hidden; border: 1px solid #232c55; min-width: 0; }
+    .code-head { display: flex; justify-content: space-between; gap: 12px; padding: 10px 16px; border-bottom: 1px solid #232c55; font-family: var(--font-mono); font-size: 0.78rem; color: var(--code-dim); }
+    .code pre { margin: 0; padding: 18px 16px; overflow-x: auto; font-family: var(--font-mono); font-size: 0.86rem; line-height: 1.7; }
+    .k { color: var(--code-key); }
+    .s { color: var(--code-str); }
+    .d { color: var(--code-dim); }
+
+    /* ---------- 6. УСЛУГИ ---------- */
+    .section-head { margin-bottom: 28px; max-width: 36rem; }
+    .section-head p { color: var(--muted); margin: 10px 0 0; }
+    .services { border-top: 1px solid var(--line); }
+    .service { display: grid; gap: 6px 24px; grid-template-columns: 1fr; padding: 22px 0; border-bottom: 1px solid var(--line); }
+    .service h3 { font-size: 1.15rem; }
+    .service p { margin: 0; color: var(--muted); }
+    .service .meta { font-family: var(--font-mono); font-size: 0.88rem; color: var(--ink); }
+    .service .meta span { color: var(--muted); }
+
+    /* ---------- 7. РАБОТЫ ---------- */
+    .works { display: grid; gap: 18px; grid-template-columns: 1fr; }
+    .work { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 26px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+    .work h3 { font-size: 1.15rem; }
+    .work p { margin: 0; color: var(--muted); }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+    .tags li { font-family: var(--font-mono); font-size: 0.78rem; padding: 3px 10px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); }
+    .work a.go { margin-top: auto; font-weight: 600; text-decoration: none; color: var(--accent); }
+    .work a.go:hover { text-decoration: underline; }
+
+    /* ---------- 8. ЭТАПЫ ---------- */
+    .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; grid-template-columns: 1fr; counter-reset: step; }
+    .steps li { counter-increment: step; padding-left: 52px; position: relative; }
+    .steps li::before {
+      content: counter(step); position: absolute; left: 0; top: 0;
+      width: 36px; height: 36px; border-radius: 50%;
+      display: grid; place-items: center;
+      font-family: var(--font-mono); font-weight: 500; font-size: 0.9rem;
+      background: var(--accent); color: var(--accent-ink);
+    }
+    .steps h3 { font-size: 1.05rem; margin-bottom: 4px; }
+    .steps p { margin: 0; color: var(--muted); }
+
+    /* ---------- 8б. ОТЗЫВЫ ---------- */
+    [hidden] { display: none !important; }
+    .reviews-grid { display: grid; gap: 24px; grid-template-columns: 1fr; align-items: start; }
+    .reviews { display: grid; gap: 16px; min-width: 0; }
+    .review { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px; margin: 0; }
+    .review .stars { color: var(--accent); letter-spacing: 0.15em; font-size: 1.05rem; margin: 0 0 8px; }
+    .review blockquote { margin: 0 0 12px; overflow-wrap: anywhere; }
+    .review figcaption { color: var(--muted); font-size: 0.92rem; }
+    .reviews-empty { border: 2px dashed var(--line); border-radius: 16px; padding: 24px; color: var(--muted); }
+    .reviews-empty strong { display: block; margin-bottom: 6px; color: var(--ink); font-family: var(--font-title); font-weight: 600; }
+    .review-form { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 26px; display: grid; gap: 16px; min-width: 0; }
+    .review-form h3 { font-size: 1.15rem; }
+    .review-form label { display: grid; gap: 6px; font-weight: 600; font-size: 0.95rem; }
+    .review-form input[type="text"], .review-form select, .review-form textarea {
+      font: inherit; font-weight: 400; color: var(--ink); background: var(--bg);
+      border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; width: 100%;
+    }
+    .review-form textarea { min-height: 120px; resize: vertical; }
+    .review-form input:focus-visible, .review-form select:focus-visible,
+    .review-form textarea:focus-visible, .review-form button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+    .review-form label.check { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; color: var(--muted); }
+    .review-form label.check input { margin-top: 5px; flex: none; }
+    .review-form .btn { font: inherit; font-weight: 600; cursor: pointer; justify-self: start; }
+    .form-error { margin: 0; color: var(--danger); font-weight: 500; }
+    .form-result { border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: grid; gap: 12px; background: var(--bg); }
+    .form-result p { margin: 0; color: var(--muted); }
+    .form-result textarea { min-height: 150px; font-family: var(--font-mono); font-size: 0.85rem; }
+
+    /* ---------- 9. КОНТАКТЫ И ПОДВАЛ ---------- */
+    .contact { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 36px 28px; }
+    .contact h2 { margin-bottom: 12px; }
+    .contact p { color: var(--muted); max-width: 34rem; margin: 0 0 24px; }
+    .contact p.mail { font-family: var(--font-mono); font-size: 1.05rem; color: var(--ink); margin: 0 0 24px; overflow-wrap: anywhere; user-select: all; }
+    footer { padding: 28px 0 44px; color: var(--muted); font-size: 0.92rem; }
+
+    @media (min-width: 760px) {
+      .hero-grid { grid-template-columns: 1.05fr 0.95fr; }
+      .service { grid-template-columns: 1.2fr 1.6fr 0.8fr; align-items: baseline; }
+      .works { grid-template-columns: 1fr 1fr; }
+      .steps { grid-template-columns: repeat(4, 1fr); }
+      .reviews-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (min-width: 960px) {
+      .works { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .btn { transition: none; }
+      .btn:hover { transform: none; }
+    }
+  </style>
+
+  <!-- Яндекс Метрика: счётчик посещений (номер 113726093). Вебвизор выключен. -->
+  <script>
+    (function (m, e, t, r, i, k, a) {
+      m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments); };
+      m[i].l = 1 * new Date();
+      for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+      k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a);
+    })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=113726093', 'ym');
+
+    ym(113726093, 'init', { ssr: true, webvisor: false, clickmap: true, accurateTrackBounce: true, trackLinks: true });
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/113726093" style="position:absolute; left:-9999px;" alt=""></div></noscript>
+</head>
+
+<body>
+  <header>
+    <div class="wrap bar">
+      <a class="logo" href="#top">Maksim Helper</a>
+      <nav aria-label="Main menu">
+        <a href="#uslugi">Services</a>
+        <a href="#raboty">Work</a>
+        <a href="#process">Process</a>
+        <a href="#otzyvy">Reviews</a>
+        <a href="#kontakty">Contact</a>
+      </nav>
+      <div class="lang" role="group" aria-label="Site language">
+        <a href="../" lang="ru" hreflang="ru">RU</a>
+        <a href="./" lang="en" aria-current="page">EN</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="label">Programming and AI</p>
+          <h1>Websites, Telegram bots and AI automation for small business</h1>
+          <p class="lead">I help freelancers, studios and small companies take bookings and answer clients without endless manual messaging. I use AI where it saves time, and I check the result myself.</p>
+          <div class="actions">
+            <a class="btn" href="mailto:aiworkingmaksim@gmail.com?subject=Request%20from%20website">Email me</a>
+            <a class="btn btn-ghost" href="#raboty">See my work</a>
+          </div>
+          <p class="note">My first projects come at a special price in exchange for a review.</p>
+        </div>
+
+        <div class="code" role="img" aria-label="Code snippet of a Telegram booking bot in Python">
+          <div class="code-head"><span>bot.py</span><span>booking bot, Python + aiogram</span></div>
+<pre><span class="k">@router.message</span>(CommandStart())
+<span class="k">async def</span> start(message, state):
+    <span class="k">await</span> state.clear()
+    <span class="k">await</span> message.answer(
+        <span class="s">"Hello! I'll book you in a minute."</span>,
+        reply_markup=main_menu(),
+    )
+<span class="d"># pick a service, date and time,
+# name and phone, request to the owner</span></pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="uslugi">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="label">Services</p>
+          <h2>What I do</h2>
+          <p>Prices are starting points and depend on the task. I give the exact price and deadline before work begins.</p>
+        </div>
+        <div class="services">
+          <div class="service">
+            <h3>One-page website</h3>
+            <p>Prices, key benefits, contacts and a booking button. Works well on phones, hosted for free.</p>
+            <div class="meta">from 3,000 ₽ <span>· 2–5 days</span></div>
+          </div>
+          <div class="service">
+            <h3>Telegram bot for bookings and requests</h3>
+            <p>The client picks a service and a time, and you get a ready request. AI can be added to answer questions.</p>
+            <div class="meta">from 3,000 ₽ <span>· 3–7 days</span></div>
+          </div>
+          <div class="service">
+            <h3>Routine automation</h3>
+            <p>Form requests land in a spreadsheet and in Telegram, and client reminders go out on their own.</p>
+            <div class="meta">from 2,000 ₽ <span>· 1–3 days</span></div>
+          </div>
+          <div class="service">
+            <h3>Server setup and launch</h3>
+            <p>I rent and configure a VPS, move your bot or site there and set up autostart, so everything runs 24/7 without your computer. Server rent is paid separately.</p>
+            <div class="meta">from 1,500 ₽ <span>· 1 day</span></div>
+          </div>
+          <div class="service">
+            <h3>Writing and fixing code</h3>
+            <p>Python and JavaScript scripts, bug fixes, improving existing code. I explain what was wrong and what changed.</p>
+            <div class="meta">from 500 ₽ <span>· per task, from 1 day</span></div>
+          </div>
+          <div class="service">
+            <h3>Improving an existing website</h3>
+            <p>Text and design edits, new sections, a review form, analytics, a site icon and your own domain.</p>
+            <div class="meta">from 1,000 ₽ <span>· 1–2 days</span></div>
+          </div>
+          <div class="service">
+            <h3>3D modeling</h3>
+            <p>Parts for 3D printing (STL) from your dimensions or sketch, interactive 3D scenes and previews for websites.</p>
+            <div class="meta">from 1,500 ₽ <span>· 1–3 days</span></div>
+          </div>
+          <div class="service">
+            <h3>Spreadsheets and reports</h3>
+            <p>Excel and Google Sheets with formulas: tracking requests, clients and expenses, with charts and summaries that update themselves.</p>
+            <div class="meta">from 1,000 ₽ <span>· 1–2 days</span></div>
+          </div>
+          <div class="service">
+            <h3>Data collection and processing</h3>
+            <p>Collecting data from public sources, cleaning and merging lists, moving data between spreadsheets and services.</p>
+            <div class="meta">from 1,500 ₽ <span>· 1–3 days</span></div>
+          </div>
+          <div class="service">
+            <h3>Presentations and documents</h3>
+            <p>Proposals, price lists, presentations and manuals: clean layout, files ready to print or send.</p>
+            <div class="meta">from 1,000 ₽ <span>· 1–2 days</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="raboty">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="label">Work</p>
+          <h2>What I have built</h2>
+          <p>The website and the bot were made for a fictional nail studio to show the result on a clear example. Both are in Russian. The 3D model is ready to print.</p>
+        </div>
+        <div class="works">
+          <article class="work">
+            <h3>Nail studio website</h3>
+            <p>One-page site: services and prices, benefits, a booking form and a button that opens the Telegram bot.</p>
+            <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>GitHub Pages</li></ul>
+            <a class="go" href="https://aiworkhelper.github.io/tudio-demo1.1/" target="_blank" rel="noopener">Open the site →</a>
+          </article>
+          <article class="work">
+            <h3>Telegram booking bot</h3>
+            <p>Guides the client step by step: service, day, time, name and phone, then sends a ready request to the owner. The demo bot is not online 24/7.</p>
+            <ul class="tags"><li>Python</li><li>aiogram</li><li>Telegram Bot API</li></ul>
+            <a class="go" href="https://t.me/AIsontrabot" target="_blank" rel="noopener">Open the bot →</a>
+          </article>
+          <article class="work">
+            <h3>3D model of a phone stand</h3>
+            <p>A parametric model for 3D printing: dimensions adjust to a specific phone. Interactive 3D preview, profile drawing and an STL file.</p>
+            <ul class="tags"><li>Python</li><li>3D printing</li><li>STL</li><li>WebGL</li></ul>
+            <a class="go" href="3d/">Rotate the model →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="label">Process</p>
+          <h2>Four steps to the result</h2>
+        </div>
+        <ol class="steps">
+          <li><h3>We discuss the task</h3><p>You tell me what you need. I clarify the details and suggest a solution.</p></li>
+          <li><h3>We agree on terms</h3><p>I name the price and deadline. We start once you agree.</p></li>
+          <li><h3>I build and show</h3><p>I show work in progress so you can adjust it early.</p></li>
+          <li><h3>I deliver and support</h3><p>I hand everything over, explain how to use it and make small fixes.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="otzyvy">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="label">Reviews</p>
+          <h2>Client reviews</h2>
+          <p>A review appears on the site after I check it, and only with the author's consent.</p>
+        </div>
+        <div class="reviews-grid">
+          <div class="reviews" id="reviews-list"></div>
+
+          <form class="review-form" id="review-form" novalidate>
+            <h3>Leave a review</h3>
+            <label>Your name
+              <input type="text" id="r-name" maxlength="60" autocomplete="name" required>
+            </label>
+            <label>Rating
+              <select id="r-rating">
+                <option value="5">5 — excellent</option>
+                <option value="4">4 — good</option>
+                <option value="3">3 — okay</option>
+                <option value="2">2 — poor</option>
+                <option value="1">1 — very poor</option>
+              </select>
+            </label>
+            <label>Review
+              <textarea id="r-text" maxlength="800" required placeholder="What was done for you and what you liked or didn't"></textarea>
+            </label>
+            <label class="check">
+              <input type="checkbox" id="r-consent">
+              <span>I agree to have this review published on the site with the name above</span>
+            </label>
+            <button class="btn" type="submit">Prepare review</button>
+            <p class="form-error" id="r-error" role="alert" hidden></p>
+
+            <div class="form-result" id="r-result" role="status" hidden>
+              <p><strong>The review has not been sent yet.</strong> Click “Open email” and send it from your mail app. If the email does not open, copy the text below and send it to aiworkingmaksim@gmail.com.</p>
+              <a class="btn" id="r-mail" href="#">Open email</a>
+              <label>Email text
+                <textarea id="r-body" readonly></textarea>
+              </label>
+              <button class="btn btn-ghost" id="r-copy" type="button">Copy text</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="kontakty">
+      <div class="wrap">
+        <div class="contact">
+          <h2>Tell me about your task</h2>
+          <p>Email me what needs to be done, and I will reply with a price and timeline estimate.</p>
+          <p class="mail" id="email-text">aiworkingmaksim@gmail.com</p>
+          <div class="actions">
+            <a class="btn" href="mailto:aiworkingmaksim@gmail.com?subject=Request%20from%20website">Email me</a>
+            <button class="btn btn-ghost" id="copy-email" type="button">Copy address</button>
+            <!-- ЗАМЕНИТЕ ссылку на GitHub, если у вас другой аккаунт -->
+            <a class="btn btn-ghost" href="https://github.com/aiworkhelper" target="_blank" rel="noopener">My GitHub</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">© <span id="year"></span> Maksim Helper<br>This site uses Yandex Metrica for visit statistics.</div>
+  </footer>
+
+  <script>
+    // Подставляем текущий год в подвал.
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Кнопка «Скопировать адрес». Если браузер не разрешает копирование,
+    // адрес просто выделяется, и его можно скопировать вручную (Ctrl+C).
+    var copyBtn = document.getElementById('copy-email');
+    var emailText = document.getElementById('email-text');
+    function selectEmail() {
+      var range = document.createRange();
+      range.selectNodeContents(emailText);
+      var sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      copyBtn.textContent = 'Address selected, press Ctrl+C';
+    }
+    copyBtn.addEventListener('click', function () {
+      var done = function () {
+        copyBtn.textContent = 'Address copied';
+        setTimeout(function () { copyBtn.textContent = 'Copy address'; }, 2500);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(emailText.textContent.trim()).then(done, selectEmail);
+      } else {
+        selectEmail();
+      }
+    });
+
+    // ---------- ОТЗЫВЫ ----------
+    // Одобренные отзывы добавляйте сюда: по одному объекту на отзыв.
+    // Пример: { name: 'Анна', rating: 5, text: 'Бот работает отлично.', date: '2026-11-01' },
+    var REVIEWS = [];
+
+    var REVIEW_EMAIL = 'aiworkingmaksim@gmail.com';
+    var reviewsList = document.getElementById('reviews-list');
+
+    function renderReviews() {
+      reviewsList.textContent = '';
+      if (REVIEWS.length === 0) {
+        var empty = document.createElement('div');
+        empty.className = 'reviews-empty';
+        var title = document.createElement('strong');
+        title.textContent = 'No reviews yet';
+        var note = document.createElement('span');
+        note.textContent = 'Client reviews will appear here after the first projects. If you have already worked with me, please leave a review using the form.';
+        empty.appendChild(title);
+        empty.appendChild(note);
+        reviewsList.appendChild(empty);
+        return;
+      }
+      REVIEWS.forEach(function (r) {
+        var fig = document.createElement('figure');
+        fig.className = 'review';
+        var stars = document.createElement('p');
+        stars.className = 'stars';
+        stars.setAttribute('role', 'img');
+        stars.setAttribute('aria-label', 'Rating ' + r.rating + ' out of 5');
+        stars.textContent = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+        var quote = document.createElement('blockquote');
+        quote.textContent = r.text;
+        var cap = document.createElement('figcaption');
+        cap.textContent = r.name + (r.date ? ', ' + r.date : '');
+        fig.appendChild(stars);
+        fig.appendChild(quote);
+        fig.appendChild(cap);
+        reviewsList.appendChild(fig);
+      });
+    }
+    renderReviews();
+
+    // Форма отзыва. Сервера у сайта нет, поэтому форма собирает текст письма,
+    // а клиент сам отправляет его со своей почты. Вы проверяете отзыв и добавляете его в REVIEWS.
+    var rForm = document.getElementById('review-form');
+    var rError = document.getElementById('r-error');
+    var rResult = document.getElementById('r-result');
+    var rBody = document.getElementById('r-body');
+    var rMail = document.getElementById('r-mail');
+    var rCopy = document.getElementById('r-copy');
+
+    function showReviewError(message, fieldId) {
+      rError.textContent = message;
+      rError.hidden = false;
+      document.getElementById(fieldId).focus();
+    }
+
+    rForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      var name = document.getElementById('r-name').value.trim();
+      var rating = document.getElementById('r-rating').value;
+      var text = document.getElementById('r-text').value.trim();
+      var consent = document.getElementById('r-consent').checked;
+
+      rResult.hidden = true;
+      if (name.length < 2) { showReviewError('Please enter your name, at least 2 characters.', 'r-name'); return; }
+      if (text.length < 10) { showReviewError('Please write a longer review, at least 10 characters.', 'r-text'); return; }
+      if (!consent) { showReviewError('Please tick the consent box: the review cannot be published without it.', 'r-consent'); return; }
+      rError.hidden = true;
+
+      var body = 'Name: ' + name + '\nRating: ' + rating + ' out of 5\nReview: ' + text +
+                 '\nConsent to publish on the site: yes';
+      rBody.value = body;
+      rMail.href = 'mailto:' + REVIEW_EMAIL + '?subject=' + encodeURIComponent('Review from website') +
+                   '&body=' + encodeURIComponent(body);
+      rResult.hidden = false;
+      rMail.focus();
+    });
+
+    rCopy.addEventListener('click', function () {
+      var done = function () {
+        rCopy.textContent = 'Text copied';
+        setTimeout(function () { rCopy.textContent = 'Copy text'; }, 2500);
+      };
+      var fallback = function () {
+        rBody.focus();
+        rBody.select();
+        rCopy.textContent = 'Text selected, press Ctrl+C';
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(rBody.value).then(done, fallback);
+      } else {
+        fallback();
+      }
+    });
+  </script>
+</body>
+</html>
