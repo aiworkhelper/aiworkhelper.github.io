@@ -228,6 +228,21 @@
     .cert b { display: block; }
     .cert span { color: var(--muted); font-size: 0.92rem; }
     .cert .cert-ic { color: #fff; font-size: 1.4rem; }
+    .about-dialog { width: min(980px, calc(100vw - 24px)); max-height: calc(100dvh - 24px); border: 1px solid var(--line); border-radius: 22px; padding: 0; background: var(--bg); color: var(--ink); overflow: auto; }
+    .about-in { padding: 30px 26px 26px; }
+    .about-dialog::backdrop { background: rgba(6, 9, 20, 0.7); backdrop-filter: blur(4px); }
+    .about-dialog h2 { margin: 0 0 22px; padding-right: 40px; }
+    .about-close { position: sticky; top: 12px; float: right; margin: 12px 12px -52px 0; z-index: 2; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-size: 1.5rem; line-height: 1; cursor: pointer; }
+    .about-close:hover { border-color: var(--accent); }
+    .cert { flex-wrap: wrap; align-items: flex-start; }
+    .cert-img { flex: 0 0 180px; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); line-height: 0; }
+    .cert-img img { width: 100%; height: auto; }
+    .cert-body { flex: 1 1 240px; min-width: 0; }
+    .cert-links { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 10px; }
+    .cert .cert-links a { font-weight: 600; color: var(--accent); text-decoration: none; font-size: 0.95rem; }
+    .cert .cert-links a:hover { text-decoration: underline; }
+    @media (max-width: 520px) { .about-in { padding: 24px 16px 18px; } .cert-img { flex-basis: 100%; } }
+    @media (prefers-reduced-motion: no-preference) { .about-dialog[open] { animation: video-in 0.3s ease; } }
     @media (min-width: 760px) { .values { grid-template-columns: 1fr 1fr; } }
     @media (min-width: 960px) { .about { grid-template-columns: 0.75fr 1.6fr; align-items: start; } }
 
@@ -280,7 +295,7 @@
         <a href="#uslugi">Услуги</a>
         <a href="#raboty">Работы</a>
         <a href="#process">Как работаю</a>
-        <a href="#obo-mne">Обо мне</a>
+        <a href="#obo-mne" data-about-open>Обо мне</a>
         <a href="#otzyvy">Отзывы</a>
         <a href="#faq">Вопросы</a>
         <a href="#kontakty">Контакты</a>
@@ -468,37 +483,6 @@
           <li><h3>Делаю и показываю</h3><p>Показываю промежуточный результат, чтобы вы могли поправить его заранее.</p></li>
           <li><h3>Сдаю и поддерживаю</h3><p>Передаю всё, объясняю, как пользоваться, и вношу мелкие правки.</p></li>
         </ol>
-      </div>
-    </section>
-
-    <section id="obo-mne">
-      <div class="wrap">
-        <div class="section-head">
-          <p class="label">Обо мне</p>
-          <h2>Кто делает ваш проект</h2>
-        </div>
-        <div class="about">
-          <div class="about-card">
-            <div class="about-face"><img src="favicon.svg?v=2" alt="" width="72" height="72"><div><b>Максим</b><span>AI Developer</span></div></div>
-            <ul class="about-facts">
-              <li>Возраст <b>20 лет</b></li>
-              <li>Направление <b>сайты, боты, ИИ</b></li>
-              <li>Формат <b>удалённо, по России и миру</b></li>
-              <li>Ответ на заявку <b>в течение дня</b></li>
-            </ul>
-          </div>
-          <div class="about-text">
-            <p class="lead-in">Меня зовут Максим, мне 20 лет. Я делаю сайты, Telegram-ботов и автоматизацию на нейросетях для мастеров, студий и небольших компаний.</p>
-            <p>Этот сайт, бот записи и сервер, на котором они работают круглосуточно, я собрал и настроил сам. Нейросети для меня — инструмент, который ускоряет работу. Отвечаю за результат я: проверяю, что всё работает и на компьютере, и на телефоне.</p>
-            <ul class="values">
-              <li><b>Честно о возможностях</b><span>Если задача мне не по силам или не нужна вам, скажу сразу, а не возьму деньги.</span></li>
-              <li><b>Довожу до запуска</b><span>Сдаю не макет, а работающий сайт или бот — с хостингом и понятной инструкцией.</span></li>
-              <li><b>Внимание к мелочам</b><span>Ровная вёрстка, адаптив под телефон, тёмная тема, быстрые страницы.</span></li>
-              <li><b>Быстро учусь</b><span>Новые инструменты осваиваю под задачу и не останавливаюсь на том, что уже умею.</span></li>
-            </ul>
-            <div class="cert"><span class="cert-ic">✓</span><div><small>Сертификат · Anthropic · 2026</small><b>AI Fluency: Framework &amp; Foundations</b><span>Курс от создателей Claude о том, как эффективно и ответственно работать с ИИ.</span></div></div>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -768,7 +752,35 @@
   </script>
   <script src="leads.js?v=20261022j"></script>
   <script src="demo.js?v=20261023b"></script>
-  <script src="anim.js?v=20261023a"></script>
+  <script src="anim.js?v=20261023b"></script>
+  <dialog class="about-dialog" id="obo-mne" aria-labelledby="about-title"><div class="about-in">
+    <button class="about-close" type="button" data-about-close aria-label="Закрыть">×</button>
+    <p class="label">Обо мне</p>
+    <h2 id="about-title">Кто делает ваш проект</h2>
+        <div class="about">
+          <div class="about-card">
+            <div class="about-face"><img src="favicon.svg?v=2" alt="" width="72" height="72"><div><b>Максим</b><span>AI Developer</span></div></div>
+            <ul class="about-facts">
+              <li>Возраст <b>20 лет</b></li>
+              <li>Направление <b>сайты, боты, ИИ</b></li>
+              <li>Формат <b>удалённо, по России и миру</b></li>
+              <li>Ответ на заявку <b>в течение дня</b></li>
+            </ul>
+          </div>
+          <div class="about-text">
+            <p class="lead-in">Меня зовут Максим, мне 20 лет. Я делаю сайты, Telegram-ботов и автоматизацию на нейросетях для мастеров, студий и небольших компаний.</p>
+            <p>Этот сайт, бот записи и сервер, на котором они работают круглосуточно, я собрал и настроил сам. Нейросети для меня — инструмент, который ускоряет работу. Отвечаю за результат я: проверяю, что всё работает и на компьютере, и на телефоне.</p>
+            <ul class="values">
+              <li><b>Честно о возможностях</b><span>Если задача мне не по силам или не нужна вам, скажу сразу, а не возьму деньги.</span></li>
+              <li><b>Довожу до запуска</b><span>Сдаю не макет, а работающий сайт или бот — с хостингом и понятной инструкцией.</span></li>
+              <li><b>Внимание к мелочам</b><span>Ровная вёрстка, адаптив под телефон, тёмная тема, быстрые страницы.</span></li>
+              <li><b>Быстро учусь</b><span>Новые инструменты осваиваю под задачу и не останавливаюсь на том, что уже умею.</span></li>
+            </ul>
+            <div class="cert"><a class="cert-img" href="https://verify.skilljar.com/c/7f4kchfb4b3k" target="_blank" rel="noopener"><img src="cert/ai-fluency.jpg" alt="Сертификат AI Fluency: Framework & Foundations" width="900" height="681" loading="lazy"></a><div class="cert-body"><small>Сертификат · Anthropic · 2026</small><b>AI Fluency: Framework &amp; Foundations</b><span>Курс от создателей Claude о том, как эффективно и ответственно работать с ИИ.</span><div class="cert-links"><a href="https://verify.skilljar.com/c/7f4kchfb4b3k" target="_blank" rel="noopener">Проверить подлинность ↗</a><a href="cert/ai-fluency.pdf" target="_blank" rel="noopener">Скачать PDF</a></div></div></div>
+          </div>
+        </div>
+  </div></dialog>
+
   <dialog class="video-dialog" id="video-dialog" aria-label="Видео-визитка">
     <button class="video-close" type="button" data-video-close aria-label="Закрыть">×</button>
     <video controls playsinline preload="none" poster="video/promo-cover.jpg" width="1080" height="1920">

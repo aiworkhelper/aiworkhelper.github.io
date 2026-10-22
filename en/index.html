@@ -219,6 +219,21 @@
     .cert b { display: block; }
     .cert span { color: var(--muted); font-size: 0.92rem; }
     .cert .cert-ic { color: #fff; font-size: 1.4rem; }
+    .about-dialog { width: min(980px, calc(100vw - 24px)); max-height: calc(100dvh - 24px); border: 1px solid var(--line); border-radius: 22px; padding: 0; background: var(--bg); color: var(--ink); overflow: auto; }
+    .about-in { padding: 30px 26px 26px; }
+    .about-dialog::backdrop { background: rgba(6, 9, 20, 0.7); backdrop-filter: blur(4px); }
+    .about-dialog h2 { margin: 0 0 22px; padding-right: 40px; }
+    .about-close { position: sticky; top: 12px; float: right; margin: 12px 12px -52px 0; z-index: 2; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-size: 1.5rem; line-height: 1; cursor: pointer; }
+    .about-close:hover { border-color: var(--accent); }
+    .cert { flex-wrap: wrap; align-items: flex-start; }
+    .cert-img { flex: 0 0 180px; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); line-height: 0; }
+    .cert-img img { width: 100%; height: auto; }
+    .cert-body { flex: 1 1 240px; min-width: 0; }
+    .cert-links { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 10px; }
+    .cert .cert-links a { font-weight: 600; color: var(--accent); text-decoration: none; font-size: 0.95rem; }
+    .cert .cert-links a:hover { text-decoration: underline; }
+    @media (max-width: 520px) { .about-in { padding: 24px 16px 18px; } .cert-img { flex-basis: 100%; } }
+    @media (prefers-reduced-motion: no-preference) { .about-dialog[open] { animation: video-in 0.3s ease; } }
     @media (min-width: 760px) { .values { grid-template-columns: 1fr 1fr; } }
     @media (min-width: 960px) { .about { grid-template-columns: 0.75fr 1.6fr; align-items: start; } }
 
@@ -271,7 +286,7 @@
         <a href="#uslugi">Services</a>
         <a href="#raboty">Work</a>
         <a href="#process">Process</a>
-        <a href="#obo-mne">About</a>
+        <a href="#obo-mne" data-about-open>About</a>
         <a href="#otzyvy">Reviews</a>
         <a href="#faq">FAQ</a>
         <a href="#kontakty">Contact</a>
@@ -459,37 +474,6 @@
           <li><h3>I build and show</h3><p>I show work in progress so you can adjust it early.</p></li>
           <li><h3>I deliver and support</h3><p>I hand everything over, explain how to use it and make small fixes.</p></li>
         </ol>
-      </div>
-    </section>
-
-    <section id="obo-mne">
-      <div class="wrap">
-        <div class="section-head">
-          <p class="label">About me</p>
-          <h2>Who builds your project</h2>
-        </div>
-        <div class="about">
-          <div class="about-card">
-            <div class="about-face"><img src="../favicon.svg?v=2" alt="" width="72" height="72"><div><b>Maksim</b><span>AI Developer</span></div></div>
-            <ul class="about-facts">
-              <li>Age <b>20</b></li>
-              <li>Focus <b>websites, bots, AI</b></li>
-              <li>Format <b>remote, worldwide</b></li>
-              <li>Reply time <b>within a day</b></li>
-            </ul>
-          </div>
-          <div class="about-text">
-            <p class="lead-in">My name is Maksim, I'm 20. I build websites, Telegram bots and AI automation for freelancers, studios and small businesses.</p>
-            <p>I built and configured this site, the booking bot and the server they run on 24/7 myself. AI is a tool that speeds up my work, but I'm the one responsible for the result: I check that everything works on desktop and on mobile.</p>
-            <ul class="values">
-              <li><b>Honest about scope</b><span>If a task isn't right for me or for you, I'll say so up front instead of taking your money.</span></li>
-              <li><b>I ship working things</b><span>You get a live site or bot, not a mockup — with hosting and clear instructions.</span></li>
-              <li><b>Attention to detail</b><span>Clean layout, mobile-friendly, dark mode, fast pages.</span></li>
-              <li><b>Fast learner</b><span>I pick up new tools for each task and keep growing beyond what I already know.</span></li>
-            </ul>
-            <div class="cert"><span class="cert-ic">✓</span><div><small>Certificate · Anthropic · 2026</small><b>AI Fluency: Framework &amp; Foundations</b><span>A course by the makers of Claude on using AI effectively and responsibly.</span></div></div>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -759,7 +743,35 @@
   </script>
   <script src="../leads.js?v=20261022j"></script>
   <script src="../demo.js?v=20261023b"></script>
-  <script src="../anim.js?v=20261023a"></script>
+  <script src="../anim.js?v=20261023b"></script>
+  <dialog class="about-dialog" id="obo-mne" aria-labelledby="about-title"><div class="about-in">
+    <button class="about-close" type="button" data-about-close aria-label="Close">×</button>
+    <p class="label">About me</p>
+    <h2 id="about-title">Who builds your project</h2>
+        <div class="about">
+          <div class="about-card">
+            <div class="about-face"><img src="../favicon.svg?v=2" alt="" width="72" height="72"><div><b>Maksim</b><span>AI Developer</span></div></div>
+            <ul class="about-facts">
+              <li>Age <b>20</b></li>
+              <li>Focus <b>websites, bots, AI</b></li>
+              <li>Format <b>remote, worldwide</b></li>
+              <li>Reply time <b>within a day</b></li>
+            </ul>
+          </div>
+          <div class="about-text">
+            <p class="lead-in">My name is Maksim, I'm 20. I build websites, Telegram bots and AI automation for freelancers, studios and small businesses.</p>
+            <p>I built and configured this site, the booking bot and the server they run on 24/7 myself. AI is a tool that speeds up my work, but I'm the one responsible for the result: I check that everything works on desktop and on mobile.</p>
+            <ul class="values">
+              <li><b>Honest about scope</b><span>If a task isn't right for me or for you, I'll say so up front instead of taking your money.</span></li>
+              <li><b>I ship working things</b><span>You get a live site or bot, not a mockup — with hosting and clear instructions.</span></li>
+              <li><b>Attention to detail</b><span>Clean layout, mobile-friendly, dark mode, fast pages.</span></li>
+              <li><b>Fast learner</b><span>I pick up new tools for each task and keep growing beyond what I already know.</span></li>
+            </ul>
+            <div class="cert"><a class="cert-img" href="https://verify.skilljar.com/c/7f4kchfb4b3k" target="_blank" rel="noopener"><img src="../cert/ai-fluency.jpg" alt="AI Fluency: Framework & Foundations certificate" width="900" height="681" loading="lazy"></a><div class="cert-body"><small>Certificate · Anthropic · 2026</small><b>AI Fluency: Framework &amp; Foundations</b><span>A course by the makers of Claude on using AI effectively and responsibly.</span><div class="cert-links"><a href="https://verify.skilljar.com/c/7f4kchfb4b3k" target="_blank" rel="noopener">Verify ↗</a><a href="../cert/ai-fluency.pdf" target="_blank" rel="noopener">Download PDF</a></div></div></div>
+          </div>
+        </div>
+  </div></dialog>
+
   <dialog class="video-dialog" id="video-dialog" aria-label="Promo video">
     <button class="video-close" type="button" data-video-close aria-label="Close">×</button>
     <video controls playsinline preload="none" poster="../video/promo-cover.jpg" width="1080" height="1920">
