@@ -20,7 +20,7 @@
   // ---------- Тексты интерфейса ----------
   var T = {
     ru: {
-      me: 'Вы', bot: 'Максим Helper · ассистент',
+      me: 'Вы', bot: 'Максим · ассистент',
       analyze: 'Разбираю задачу. Вот план:',
       build: 'Пишу решение',
       check: 'Проверяю:',
@@ -40,7 +40,7 @@
       examples: ['Telegram-бот для записи в барбершоп', '3D-модель держателя для наушников', 'Таблица учёта заказов и расходов', 'Сайт для кофейни с меню и картой']
     },
     en: {
-      me: 'You', bot: 'Maksim Helper · assistant',
+      me: 'You', bot: 'Maksim · assistant',
       analyze: 'Analyzing the task. Here is the plan:',
       build: 'Building the solution',
       check: 'Checking:',
