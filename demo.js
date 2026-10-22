@@ -124,6 +124,17 @@
         res: ['The document is ready', 'A clean file you can confidently send to a client.'] },
       code: ['slides = [', '  title("Studio offer 2026"),', '  bullets(["Services", "Prices", "Contacts"]),', '  table(price_list),', ']', 'export(slides, "offer.pdf")'] },
 
+    { id: 'photo', re: /фото|снимок|оживи|ретуш|фон[ау]?\b|photo|picture|retouch|background/i, rub: 300, file: 'photo-edit',
+      ru: { name: 'Обработка фото с ИИ', days: 'от 1 дня',
+        plan: ['Разбираю исходное фото и задачу', 'Обрабатываю нейросетью: оживление, фон, предметы', 'Дорабатываю детали вручную'],
+        checks: ['Лица и руки без искажений', 'Нет следов склейки', 'Качество подходит для печати и соцсетей'],
+        res: ['Фото готово', 'Обработанный снимок или короткое видео в хорошем качестве.'] },
+      en: { name: 'AI photo editing', days: 'from 1 day',
+        plan: ['Review the source photo and the task', 'Process it with AI: animation, background, objects', 'Fine-tune details by hand'],
+        checks: ['No distorted faces or hands', 'No visible seams', 'Quality fits print and social media'],
+        res: ['The photo is ready', 'An edited image or a short video in good quality.'] },
+      code: ['task = "animate photo, replace background"', 'img = load("source.jpg")', 'img = ai.edit(img, task)', 'img = upscale(img, x2)', 'save(img, "result.png")'] },
+
     { id: 'code', re: /код|скрипт|ошибк|баг|исправ|python|питон|javascript|script|bug|fix|code|парс|данн|data|scrap/i, rub: 500, file: 'script.py',
       ru: { name: 'Написание и исправление кода', days: 'от 1 дня',
         plan: ['Воспроизвожу задачу или ошибку', 'Пишу и исправляю код', 'Объясняю, что изменилось'],
