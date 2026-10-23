@@ -120,3 +120,19 @@
     if (location.hash && history.replaceState) history.replaceState(null, '', location.pathname + location.search);
   });
 })();
+
+/*
+  Пришли с другой страницы по ссылке вида aiworkhelper.ru/#raboty
+  (из 3D-модели, статьи или страницы 404): браузер уже прокрутил к разделу —
+  убираем «#raboty» из адреса, чтобы он оставался чистым.
+*/
+(function () {
+  'use strict';
+  function clean() {
+    if (!location.hash || !history.replaceState) return;
+    var id = decodeURIComponent(location.hash.slice(1));
+    if (id && document.getElementById(id)) history.replaceState(null, '', location.pathname + location.search);
+  }
+  if (document.readyState === 'complete') setTimeout(clean, 0);
+  else window.addEventListener('load', function () { setTimeout(clean, 0); });
+})();
