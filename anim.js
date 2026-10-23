@@ -96,3 +96,27 @@
     });
   });
 })();
+
+/*
+  Ссылки меню на разделы (#uslugi, #raboty…): плавно прокручиваем к разделу,
+  но не дописываем «#raboty» в адрес — он остаётся чистым: aiworkhelper.ru
+*/
+(function () {
+  'use strict';
+  document.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+    var a = e.target.closest ? e.target.closest('a[href^="#"]') : null;
+    if (!a || a.hasAttribute('data-about-open')) return;
+    var id = a.getAttribute('href').slice(1);
+    if (!id) return;
+    var el = document.getElementById(id);
+    if (!el && id !== 'top') return;
+    e.preventDefault();
+    // блоки, которые ещё не «проявились», показываем сразу, чтобы не было пустых мест
+    var hidden = document.querySelectorAll('.reveal:not(.in)');
+    for (var i = 0; i < hidden.length; i++) hidden[i].classList.add('in');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    else window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (location.hash && history.replaceState) history.replaceState(null, '', location.pathname + location.search);
+  });
+})();
