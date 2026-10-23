@@ -275,7 +275,7 @@
     ym(113726093, 'init', { ssr: true, webvisor: false, clickmap: true, accurateTrackBounce: true, trackLinks: true });
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/113726093" style="position:absolute; left:-9999px;" alt=""></div></noscript>
-  <link rel="stylesheet" href="../anim.css?v=20261022k">
+  <link rel="stylesheet" href="../anim.css?v=20261023a">
   <link rel="stylesheet" href="../demo.css?v=20261022d">
 </head>
 
@@ -509,6 +509,10 @@
               <input type="checkbox" id="r-consent">
               <span>I agree to have this review published on the site with the name above</span>
             </label>
+            <label class="check">
+              <input type="checkbox" id="r-pd">
+              <span>I agree to the processing of my personal data under the <a href="privacy/" target="_blank">Privacy Policy</a></span>
+            </label>
             <button class="btn" type="submit">Prepare review</button>
             <p class="form-error" id="r-error" role="alert" hidden></p>
             <p class="form-ok" id="r-ok" role="status" hidden></p>
@@ -595,8 +599,8 @@
               <textarea name="task" maxlength="1500" placeholder="For example: a booking bot for a barbershop" required></textarea>
             </label>
             <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <label class="check"><input type="checkbox" name="pd_consent"><span>I agree to the processing of my personal data under the <a href="privacy/" target="_blank">Privacy Policy</a></span></label>
             <button class="btn" type="submit">Send request</button>
-            <p class="form-note">By clicking the button, you agree that I will contact you using the details above.</p>
             <p class="form-error" role="alert" hidden></p>
             <p class="form-ok" role="status" hidden></p>
           </form>
@@ -606,7 +610,7 @@
   </main>
 
   <footer>
-    <div class="wrap">© <span id="year"></span> Maksim — AI Developer<br>This site uses Yandex Metrica for visit statistics.</div>
+    <div class="wrap">© <span id="year"></span> Maksim — AI Developer<br>This site uses Yandex Metrica for visit statistics. <a href="privacy/">Privacy Policy</a></div>
   </footer>
 
   <script>
@@ -705,6 +709,7 @@
       if (name.length < 2) { showReviewError('Please enter your name, at least 2 characters.', 'r-name'); return; }
       if (text.length < 10) { showReviewError('Please write a longer review, at least 10 characters.', 'r-text'); return; }
       if (!consent) { showReviewError('Please tick the consent box: the review cannot be published without it.', 'r-consent'); return; }
+      if (!document.getElementById('r-pd').checked) { showReviewError('Please agree to the processing of personal data.', 'r-pd'); return; }
       rError.hidden = true;
 
       var body = 'Name: ' + name + '\nRating: ' + rating + ' out of 5\nReview: ' + text +
@@ -719,7 +724,7 @@
       if (!window.sendLead) { showMailFallback(); return; }
       rBtn.disabled = true; rBtn.textContent = 'Sending…';
       var fields = { _subject: 'Отзыв с сайта (EN): ' + name };
-      fields['Name'] = name; fields['Rating'] = rating + ' out of 5'; fields['Review'] = text; fields['Consent to publish'] = 'yes';
+      fields['Name'] = name; fields['Rating'] = rating + ' out of 5'; fields['Review'] = text; fields['Consent to publish'] = 'yes'; fields['Consent to data processing'] = 'yes';
       window.sendLead(fields).then(function () {
         rOk.textContent = 'Thank you! Your review has been sent and will appear on the site after I check it.'; rOk.hidden = false; rForm.reset();
       }).catch(showMailFallback).then(function () { rBtn.disabled = false; rBtn.textContent = rBtnText; });
@@ -742,7 +747,7 @@
       }
     });
   </script>
-  <script src="../leads.js?v=20261022j"></script>
+  <script src="../leads.js?v=20261023a"></script>
   <script src="../demo.js?v=20261023b"></script>
   <script src="../anim.js?v=20261023c"></script>
   <dialog class="about-dialog" id="obo-mne" aria-labelledby="about-title"><div class="about-in">

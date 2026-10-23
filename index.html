@@ -285,7 +285,7 @@
     ym(113726093, 'init', { ssr: true, webvisor: false, clickmap: true, accurateTrackBounce: true, trackLinks: true });
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/113726093" style="position:absolute; left:-9999px;" alt=""></div></noscript>
-  <link rel="stylesheet" href="anim.css?v=20261022k">
+  <link rel="stylesheet" href="anim.css?v=20261023a">
   <link rel="stylesheet" href="demo.css?v=20261022d">
 </head>
 
@@ -519,6 +519,10 @@
               <input type="checkbox" id="r-consent">
               <span>Согласен(на) на публикацию отзыва на сайте с указанным именем</span>
             </label>
+            <label class="check">
+              <input type="checkbox" id="r-pd">
+              <span>Даю <a href="consent/" target="_blank">согласие на обработку персональных данных</a> и ознакомлен(а) с <a href="privacy/" target="_blank">Политикой</a></span>
+            </label>
             <button class="btn" type="submit">Подготовить отзыв</button>
             <p class="form-error" id="r-error" role="alert" hidden></p>
             <p class="form-ok" id="r-ok" role="status" hidden></p>
@@ -605,8 +609,8 @@
               <textarea name="task" maxlength="1500" placeholder="Например: бот для записи клиентов в барбершоп" required></textarea>
             </label>
             <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <label class="check"><input type="checkbox" name="pd_consent"><span>Я даю <a href="consent/" target="_blank">согласие на обработку персональных данных</a> и ознакомлен(а) с <a href="privacy/" target="_blank">Политикой</a></span></label>
             <button class="btn" type="submit">Отправить заявку</button>
-            <p class="form-note">Нажимая кнопку, вы соглашаетесь, что я свяжусь с вами по указанному контакту.</p>
             <p class="form-error" role="alert" hidden></p>
             <p class="form-ok" role="status" hidden></p>
           </form>
@@ -616,7 +620,7 @@
   </main>
 
   <footer>
-    <div class="wrap">© <span id="year"></span> Максим — AI Developer<br>Сайт использует Яндекс Метрику для статистики посещений.</div>
+    <div class="wrap">© <span id="year"></span> Максим — AI Developer<br>Сайт использует Яндекс Метрику для статистики посещений. <a href="privacy/">Политика обработки персональных данных</a> · <a href="consent/">Согласие на обработку ПД</a></div>
   </footer>
 
   <script>
@@ -715,6 +719,7 @@
       if (name.length < 2) { showReviewError('Укажите имя, хотя бы 2 символа.', 'r-name'); return; }
       if (text.length < 10) { showReviewError('Напишите отзыв подлиннее, хотя бы 10 символов.', 'r-text'); return; }
       if (!consent) { showReviewError('Отметьте согласие на публикацию: без него отзыв разместить нельзя.', 'r-consent'); return; }
+      if (!document.getElementById('r-pd').checked) { showReviewError('Отметьте согласие на обработку персональных данных.', 'r-pd'); return; }
       rError.hidden = true;
 
       var body = 'Имя: ' + name + '\nОценка: ' + rating + ' из 5\nОтзыв: ' + text +
@@ -729,7 +734,7 @@
       if (!window.sendLead) { showMailFallback(); return; }
       rBtn.disabled = true; rBtn.textContent = 'Отправляю…';
       var fields = { _subject: 'Отзыв с сайта: ' + name };
-      fields['Имя'] = name; fields['Оценка'] = rating + ' из 5'; fields['Отзыв'] = text; fields['Согласие на публикацию'] = 'да';
+      fields['Имя'] = name; fields['Оценка'] = rating + ' из 5'; fields['Отзыв'] = text; fields['Согласие на публикацию'] = 'да'; fields['Согласие на обработку ПД'] = 'да';
       window.sendLead(fields).then(function () {
         rOk.textContent = 'Спасибо! Отзыв отправлен и появится на сайте после проверки.'; rOk.hidden = false; rForm.reset();
       }).catch(showMailFallback).then(function () { rBtn.disabled = false; rBtn.textContent = rBtnText; });
@@ -752,7 +757,7 @@
       }
     });
   </script>
-  <script src="leads.js?v=20261022j"></script>
+  <script src="leads.js?v=20261023a"></script>
   <script src="demo.js?v=20261023b"></script>
   <script src="anim.js?v=20261023c"></script>
   <dialog class="about-dialog" id="obo-mne" aria-labelledby="about-title"><div class="about-in">

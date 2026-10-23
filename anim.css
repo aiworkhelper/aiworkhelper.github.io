@@ -94,6 +94,10 @@
 .lead-form .form-error a { color: inherit; font-weight: 600; }
 .form-ok { margin: 0; color: var(--accent); font-weight: 600; }
 .contact .lead-form p { margin: 0; max-width: none; }
+.lead-form label.check, .review-form label.check { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; font-size: 0.88rem; line-height: 1.5; color: var(--muted); }
+.lead-form label.check input { width: 18px; height: 18px; padding: 0; margin: 2px 0 0; flex: none; accent-color: var(--accent); }
+.lead-form label.check a, .review-form label.check a { color: var(--accent); }
+footer a { color: inherit; }
 .contact .lead-form .form-ok { color: var(--accent); }
 .contact .lead-form .form-error { color: var(--danger); }
 .hp { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; opacity: 0; }

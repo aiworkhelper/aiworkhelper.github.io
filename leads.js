@@ -20,14 +20,14 @@
     ok: 'Thank you! Your request has been sent. I will reply within a day with a price and timeline.',
     fail: 'Could not send the form. Please send the same text by email:', mailBtn: 'Open email',
     vName: 'Please enter your name.', vContact: 'Please leave a way to contact you: Telegram, phone or email.',
-    vTask: 'Please describe the task in a couple of words.',
+    vTask: 'Please describe the task in a couple of words.', vConsent: 'Please agree to the processing of personal data.', fConsent: 'Consent to data processing',
     fName: 'Name', fContact: 'Contact', fTask: 'Task', fSource: 'Source'
   } : {
     source: 'Сайт (RU)', leadSubject: 'Заявка с сайта: ', sending: 'Отправляю…',
     ok: 'Спасибо! Заявка отправлена. Отвечу в течение дня с ценой и сроком.',
     fail: 'Не получилось отправить форму. Отправьте, пожалуйста, тот же текст письмом:', mailBtn: 'Открыть письмо',
     vName: 'Укажите имя.', vContact: 'Оставьте контакт для ответа: Telegram, телефон или почту.',
-    vTask: 'Опишите задачу хотя бы парой слов.',
+    vTask: 'Опишите задачу хотя бы парой слов.', vConsent: 'Отметьте согласие на обработку персональных данных.', fConsent: 'Согласие на обработку ПД',
     fName: 'Имя', fContact: 'Контакт', fTask: 'Задача', fSource: 'Источник'
   };
 
@@ -57,6 +57,7 @@
     var contact = form.querySelector('[name="contact"]');
     var task = form.querySelector('[name="task"]');
     var honey = form.querySelector('[name="_honey"]');
+    var pd = form.querySelector('[name="pd_consent"]');
     var btn = form.querySelector('button[type="submit"]');
     var err = form.querySelector('.form-error');
     var ok = form.querySelector('.form-ok');
@@ -72,11 +73,13 @@
       if (v.n.length < 2) return fail(T.vName, name);
       if (v.c.length < 3) return fail(T.vContact, contact);
       if (v.t.length < 4) return fail(T.vTask, task);
+      if (pd && !pd.checked) return fail(T.vConsent, pd);
 
       btn.disabled = true; btn.textContent = T.sending;
       var fields = {};
       fields._subject = T.leadSubject + v.n;
       fields[T.fName] = v.n; fields[T.fContact] = v.c; fields[T.fTask] = v.t; fields[T.fSource] = T.source;
+      if (pd) fields[T.fConsent] = en ? 'yes' : 'да';
       if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.c)) fields._replyto = v.c;   // только если это почта, а не @ник
 
       window.sendLead(fields).then(function () {
