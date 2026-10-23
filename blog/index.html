@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <script>if(location.hostname==="aiworkhelper.github.io")location.replace("https://aiworkhelper.ru"+location.pathname+location.search+location.hash)</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Статьи — Максим, AI Developer</title>
+  <meta name="description" content="Статьи о сайтах, Telegram-ботах и нейросетях для мастеров, студий и малого бизнеса: цены, примеры, советы.">
+  <link rel="canonical" href="https://aiworkhelper.ru/blog/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Максим — AI Developer">
+  <meta property="og:title" content="Статьи — Максим, AI Developer">
+  <meta property="og:description" content="Статьи о сайтах, Telegram-ботах и нейросетях для мастеров, студий и малого бизнеса: цены, примеры, советы.">
+  <meta property="og:url" content="https://aiworkhelper.ru/blog/">
+  <meta property="og:image" content="https://aiworkhelper.ru/og/og-ru.jpg">
+  <meta property="og:locale" content="ru_RU">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../favicon.svg?v=2" type="image/svg+xml">
+  <link rel="icon" href="../favicon.ico?v=2" sizes="48x48">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@600;700&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();
+    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js?id=113726093", "ym");
+    ym(113726093, "init", { webvisor:true, clickmap:true, accurateTrackBounce:true, trackLinks:true });
+  </script>
+
+  <style>
+    :root { --bg:#f0f2f8; --surface:#fff; --ink:#12172b; --muted:#565d78; --accent:#2f4bff; --accent-ink:#fff; --line:#d9deec; --soft:#e8ecff; }
+    @media (prefers-color-scheme: dark) { :root { --bg:#0d1120; --surface:#151b30; --ink:#edf0fb; --muted:#9aa3c0; --accent:#8196ff; --accent-ink:#0d1120; --line:#273050; --soft:#1c2547; } }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:'Golos Text',system-ui,-apple-system,'Segoe UI',sans-serif; line-height:1.7; font-size:1.05rem; }
+    .wrap { max-width:780px; margin:0 auto; padding:0 20px; }
+    header { border-bottom:1px solid var(--line); }
+    header .wrap { display:flex; align-items:center; justify-content:space-between; gap:12px; padding-block:16px; max-width:1100px; }
+    .logo { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--ink); }
+    .logo b { font-family:'Geologica',sans-serif; display:block; line-height:1.1; }
+    .logo small { font-family:'JetBrains Mono',monospace; font-size:.68rem; letter-spacing:.14em; color:var(--accent); }
+    .top-nav { display:flex; gap:18px; } .top-nav a { color:var(--muted); text-decoration:none; font-weight:500; } .top-nav a:hover { color:var(--ink); }
+    main { padding:40px 0 56px; }
+    .crumbs { font-size:.9rem; color:var(--muted); margin:0 0 14px; } .crumbs a { color:var(--muted); }
+    .label { font-family:'JetBrains Mono',monospace; font-size:.8rem; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); margin:0 0 10px; }
+    h1 { font-family:'Geologica',sans-serif; font-size:clamp(1.8rem,5vw,2.6rem); line-height:1.12; margin:0 0 14px; letter-spacing:-.01em; }
+    .lead { font-size:1.18rem; color:var(--muted); margin:0 0 10px; }
+    .meta { font-size:.9rem; color:var(--muted); margin:0 0 30px; }
+    article h2 { font-family:'Geologica',sans-serif; font-size:1.45rem; line-height:1.25; margin:40px 0 12px; }
+    article h3 { font-family:'Geologica',sans-serif; font-size:1.12rem; margin:26px 0 8px; }
+    article p { margin:0 0 14px; }
+    article ul, article ol { padding-left:24px; margin:0 0 16px; } article li { margin-bottom:6px; }
+    article a { color:var(--accent); }
+    .note { border-left:4px solid var(--accent); background:var(--soft); padding:14px 18px; border-radius:0 12px 12px 0; margin:20px 0; }
+    .note p:last-child { margin:0; }
+    .tbl { overflow-x:auto; margin:10px 0 20px; border:1px solid var(--line); border-radius:12px; background:var(--surface); }
+    table { width:100%; border-collapse:collapse; font-size:.98rem; }
+    th, td { text-align:left; padding:11px 14px; border-bottom:1px solid var(--line); vertical-align:top; }
+    th { font-weight:600; background:var(--soft); } tr:last-child td { border-bottom:0; }
+    td.n, th.n { text-align:right; white-space:nowrap; }
+    .chat { background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:16px; display:grid; gap:8px; margin:12px 0 22px; font-size:.95rem; }
+    .chat p { margin:0; padding:8px 12px; border-radius:14px; max-width:80%; }
+    .chat .bot { background:var(--soft); justify-self:start; border-bottom-left-radius:4px; }
+    .chat .me { background:var(--accent); color:var(--accent-ink); justify-self:end; border-bottom-right-radius:4px; }
+    .cta { margin:40px 0 0; background:var(--surface); border:1px solid var(--line); border-radius:20px; padding:26px; }
+    .cta h2 { font-family:'Geologica',sans-serif; margin:0 0 8px; font-size:1.3rem; } .cta p { color:var(--muted); }
+    .btn { display:inline-block; padding:13px 24px; border-radius:10px; background:var(--accent); color:var(--accent-ink); font-weight:600; text-decoration:none; margin:6px 10px 0 0; border:2px solid var(--accent); }
+    .btn.ghost { background:transparent; color:var(--ink); border-color:var(--ink); }
+    .more { margin-top:34px; } .more h2 { font-family:'Geologica',sans-serif; font-size:1.15rem; margin-bottom:6px; } .more a { color:var(--accent); }
+    .posts { display:grid; gap:16px; margin-top:28px; }
+    .post { display:block; background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:24px; text-decoration:none; color:var(--ink); transition:transform .2s, border-color .2s; }
+    .post:hover { transform:translateY(-2px); border-color:var(--accent); }
+    .post h2 { font-family:'Geologica',sans-serif; font-size:1.3rem; line-height:1.25; margin:0 0 8px; }
+    .post p { color:var(--muted); margin:0 0 10px; } .post span { color:var(--accent); font-weight:600; }
+    footer { padding:0 0 44px; color:var(--muted); font-size:.92rem; } footer a { color:inherit; }
+    @media (max-width:560px) { th, td { padding:9px 10px; font-size:.92rem; } .top-nav { display:none; } td.n, th.n { white-space:normal; } }
+
+  </style>
+</head>
+<body>
+  <header><div class="wrap"><a class="logo" href="../"><img src="../favicon.svg?v=2" alt="" width="32" height="32"><span><b>Максим</b><small>AI DEVELOPER</small></span></a>
+  <nav class="top-nav"><a href="../#uslugi">Услуги</a><a href="../#cena">Цены</a><a href="../blog/">Статьи</a><a href="../#kontakty">Контакты</a></nav></div></header>
+  <main><div class="wrap">
+    <p class="crumbs"><a href="../">Главная</a></p>
+    <p class="label">Статьи</p>
+    <h1>Сайты, боты и нейросети для малого бизнеса</h1>
+    <p class="lead">Простыми словами о том, сколько это стоит, как работает и когда действительно нужно.</p>
+    <div class="posts">
+      <a class="post" href="skolko-stoit-sajt-dlya-mastera/"><h2>Сколько стоит сайт для мастера маникюра в 2026 году</h2><p>Разработка, хостинг и домен: из чего складывается цена, пример расчёта на первый год и на чём можно не тратиться.</p><span>Читать →</span></a>
+      <a class="post" href="telegram-bot-dlya-zapisi/"><h2>Telegram-бот для записи клиентов: зачем он салону и как работает</h2><p>Как бот записывает клиентов без переписки, что приходит владельцу, сколько стоит и когда бот не нужен.</p><span>Читать →</span></a>
+    </div>
+
+  </div></main>
+  <footer><div class="wrap">© 2026 Максим — AI Developer · <a href="../privacy/">Политика обработки персональных данных</a></div></footer>
+</body>
+</html>
